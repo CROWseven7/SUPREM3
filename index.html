@@ -75,7 +75,7 @@
                         </div>
                         <h3 class="text-xl font-semibold">Doações</h3>
                     </div>
-                    <p class="text-4xl font-bold">Loading..</p>
+                    <p id="donations" class="text-4xl font-bold">Loading...</p>
                     <p class="text-gray-400 mt-2">Por semana para a equipe</p>
                 </div>
             </div>
@@ -150,6 +150,7 @@
             
             document.getElementById('members').textContent = data.members;
             document.getElementById('bosses').textContent = data.bosses;
+            document.getElementById('donations').textContent = `$${data.donations}`;
         } catch (err) {
             console.error("Erro ao atualizar estatísticas:", err);
         }
@@ -163,5 +164,6 @@
     </script>
 </body>
 </html>
+
 
 
