@@ -140,30 +140,19 @@
     <script src="components/footer.js"></script>
     <script src="script.js"></script>
 
-    <!-- Script para atualizar os números automaticamente -->
+    <!-- Script para atualizar os números automaticamente via Apps Script JSON -->
     <script>
-    async function fetchHTML(url) {
-        const res = await fetch(url);
-        const text = await res.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, 'text/html');
-        return doc;
-    }
-
     async function updateStats() {
-        // Substitua pelos links das abas publicadas como Página Web
-        const membersURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1797724220&single=true';
-        const bossesURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1132147204&single=true';
-
-        // Membros Ativos (H2 → linha 2, coluna 8)
-        const membersDoc = await fetchHTML(membersURL);
-        const membersCell = membersDoc.querySelector('table tr:nth-child(2) td:nth-child(8)');
-        if (membersCell) document.getElementById('members').textContent = membersCell.textContent;
-
-        // Bosses Concluídos (A56 → linha 56, coluna 1)
-        const bossesDoc = await fetchHTML(bossesURL);
-        const bossesCell = bossesDoc.querySelector('table tr:nth-child(56) td:nth-child(1)');
-        if (bossesCell) document.getElementById('bosses').textContent = bossesCell.textContent;
+        const url = "https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec"; // substitua pelo link do Apps Script
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            document.getElementById('members').textContent = data.members;
+            document.getElementById('bosses').textContent = data.bosses;
+        } catch (err) {
+            console.error("Erro ao atualizar estatísticas:", err);
+        }
     }
 
     updateStats();
@@ -174,7 +163,3 @@
     </script>
 </body>
 </html>
-
-
-
-
