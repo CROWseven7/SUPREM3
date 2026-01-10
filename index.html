@@ -75,7 +75,7 @@
                         </div>
                         <h3 class="text-xl font-semibold">Doações</h3>
                     </div>
-                    <p class="text-4xl font-bold">$700</p>
+                    <p id="donations" class="text-4xl font-bold">$700</p>
                     <p class="text-gray-400 mt-2">Por semana para a equipe</p>
                 </div>
             </div>
@@ -143,13 +143,14 @@
     <!-- Script para atualizar os números automaticamente via Apps Script JSON -->
     <script>
     async function updateStats() {
-        const url = "COLE_AQUI_A_URL_DO_APPS_SCRIPT"; // Substitua pelo link do Apps Script
+        const url = "https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec"; // Substitua pelo link do Apps Script
         try {
             const response = await fetch(url);
             const data = await response.json();
 
             document.getElementById('members').textContent = data.members;
             document.getElementById('bosses').textContent = data.bosses;
+            document.getElementById('donations').textContent = `$${data.donations}`; // Atualiza doações com "$"
         } catch (err) {
             console.error("Erro ao atualizar estatísticas:", err);
         }
