@@ -53,7 +53,7 @@
                         </div>
                         <h3 class="text-xl font-semibold">Bosses Concluídos</h3>
                     </div>
-                    <p class="text-4xl font-bold">19</p>
+                    <p id="bosses" class="text-4xl font-bold">19</p>
                     <p class="text-gray-400 mt-2">Em 2026</p>
                 </div>
 
@@ -64,7 +64,7 @@
                         </div>
                         <h3 class="text-xl font-semibold">Membros Ativos</h3>
                     </div>
-                    <p class="text-4xl font-bold">16</p>
+                    <p id="members" class="text-4xl font-bold">16</p>
                     <p class="text-gray-400 mt-2">Pilotos na equipe</p>
                 </div>
 
@@ -139,10 +139,38 @@
     <script src="components/header.js"></script>
     <script src="components/footer.js"></script>
     <script src="script.js"></script>
+
+    <!-- Script para atualizar os números automaticamente -->
+    <script>
+    async function fetchHTML(url) {
+        const res = await fetch(url);
+        const text = await res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        return doc;
+    }
+
+    async function updateStats() {
+        // Substitua pelos links das abas publicadas como Página Web
+        const membersURL = 'LINK_ABA1';
+        const bossesURL = 'LINK_ABA2';
+
+        // Membros Ativos (H2 → linha 2, coluna 8)
+        const membersDoc = await fetchHTML(membersURL);
+        const membersCell = membersDoc.querySelector('table tr:nth-child(2) td:nth-child(8)');
+        if (membersCell) document.getElementById('members').textContent = membersCell.textContent;
+
+        // Bosses Concluídos (A56 → linha 56, coluna 1)
+        const bossesDoc = await fetchHTML(bossesURL);
+        const bossesCell = bossesDoc.querySelector('table tr:nth-child(56) td:nth-child(1)');
+        if (bossesCell) document.getElementById('bosses').textContent = bossesCell.textContent;
+    }
+
+    updateStats();
+    </script>
+
     <script>
         feather.replace();
     </script>
 </body>
 </html>
-
-
