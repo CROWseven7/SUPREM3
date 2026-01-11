@@ -97,12 +97,6 @@
                 </div>
                 <div class="p-1">
                     <div class="overflow-x-auto">
-                      <button 
-  onclick="toggleFullscreen()" 
-  class="bg-gray-800 text-white border border-gray-600 px-4 py-2 rounded mb-2 hover:bg-gray-700 transition"
-  style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
-  <span>⛶</span> Ver em Tela Cheia
-</button>
                    <iframe
                             id="Planilha"
                             src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1797724220&amp;single=true&amp;widget=true&amp;headers=false" 
@@ -110,23 +104,6 @@
                             frameborder="0"
                             allowfullscreen
                         ></iframe>
-                        <script>
-function toggleFullscreen() {
-  const elem = document.getElementById("minhaPlanilha");
-  
-  // Tenta todos os métodos possíveis para diferentes navegadores
-  const metodo = elem.requestFullscreen || 
-                 elem.webkitRequestFullscreen || 
-                 elem.mozRequestFullScreen || 
-                 elem.msRequestFullscreen;
-
-  if (metodo) {
-    metodo.call(elem);
-  } else {
-    alert("Seu navegador não suporta tela cheia para este elemento.");
-  }
-}
-</script>
                     </div>
                 </div>
             </div>
@@ -191,4 +168,5 @@ function toggleFullscreen() {
     </script>
 </body>
 </html>
+
 
