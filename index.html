@@ -84,16 +84,19 @@
             </div>
         </section>
 
-        <section class="mb-12">
+       <section class="mb-12">
             <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
                 <i data-feather="calendar" class="mr-2"></i>
                 Agenda semanal
             </h2>
-            
+
             <div class="bg-card rounded-lg shadow-xl overflow-hidden border border-gray-800">
-                <div class="p-4 bg-card border-b border-card flex items-center">
-                    <i data-feather="clock" class="text-primary mr-2"></i>
-                    <span class="font-medium">Lista de bosses</span>
+                <div class="p-4 bg-card border-b border-card flex items-center justify-between">
+                    <div class="flex items-center">
+                        <i data-feather="clock" class="text-primary mr-2"></i>
+                        <span class="font-medium">Lista de bosses</span>
+                    </div>
+
                     <button
                         id="open-sheet-btn"
                         class="flex items-center gap-2 bg-primary text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
@@ -101,15 +104,15 @@
                         Abrir em nova aba
                     </button>
                 </div>
+
                 <div class="p-1">
-                    <div class="overflow-hidden rounded-lg bg-[#121212] border border-gray-700">                    
-                       <iframe 
-                           id="planilha"
-                           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false"
-                           class="w-full min-h-[400px] md:min-h-[600px] border-0"
-                           frameborder="0"
-                           allowfullscreen>
-                       </iframe>
+                    <div class="overflow-hidden rounded-lg bg-[#121212] border border-gray-700">
+                        <iframe
+                            id="planilha"
+                            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false"
+                            class="w-full min-h-[400px] md:min-h-[600px] border-0"
+                            frameborder="0">
+                        </iframe>
                     </div>
                 </div>
             </div>
@@ -184,6 +187,7 @@
     </script>
 </body>
 </html>
+
 
 
 
