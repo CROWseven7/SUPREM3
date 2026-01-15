@@ -8,6 +8,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -41,12 +44,8 @@
 
         <!-- Estatísticas -->
         <section class="mb-12">
-            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center gap-2">
-                <!-- Bar Chart Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3v18h18"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 18V9m4 9V5m4 13v-4"/>
-                </svg>
+            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
+                <i data-feather="bar-chart-2" class="mr-2"></i>
                 Estatísticas da Equipe
             </h2>
 
@@ -54,10 +53,7 @@
                 <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
                     <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-ambar bg-opacity-20 mr-4">
-                            <!-- Award Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M12 22l4-8-4-8-4 8 4 8z"/>
-                            </svg>
+                            <i data-feather="award" class="text-yellow"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Bosses Concluídos</h3>
                     </div>
@@ -68,10 +64,7 @@
                 <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
                     <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-primary bg-opacity-20 mr-4">
-                            <!-- Users Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M12 12a4 4 0 100-8 4 4 0 000 8z"/>
-                            </svg>
+                            <i data-feather="users" class="text-primary"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Membros Ativos</h3>
                     </div>
@@ -82,11 +75,7 @@
                 <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
                     <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-green bg-opacity-20 mr-4">
-                            <!-- Dollar Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.333 0-2 .667-2 2s.667 2 2 2 2 .667 2 2-.667 2-2 2"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v4m0 12v4m0-16h-4m4 0h4m-4 8h-4m4 0h4"/>
-                            </svg>
+                            <i data-feather="dollar-sign" class="text-green"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Doações</h3>
                     </div>
@@ -98,31 +87,22 @@
 
         <!-- Agenda semanal -->
         <section class="mb-12">
-            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center gap-2">
-                <!-- Calendar Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
+            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
+                <i data-feather="calendar" class="mr-2"></i>
                 Agenda semanal
             </h2>
 
             <div class="bg-card rounded-lg shadow-xl overflow-hidden border border-gray-800">
                 <div class="p-4 bg-card border-b border-card flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <!-- Clock Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2M12 3a9 9 0 110 18 9 9 0 010-18z"/>
-                        </svg>
+                    <div class="flex items-center">
+                        <i data-feather="clock" class="text-primary mr-2"></i>
                         <span class="font-medium">Lista de bosses</span>
                     </div>
 
                     <button
                         id="open-sheet-btn"
                         class="flex items-center gap-2 bg-primary text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
-                        <!-- External Link Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14l11-11"/>
-                        </svg>
+                        <i data-feather="external-link"></i>
                         Abrir em nova aba
                     </button>
                 </div>
@@ -142,11 +122,8 @@
 
         <!-- FAQ -->
         <section class="mb-12">
-            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center gap-2">
-                <!-- Help Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9a3 3 0 116 0c0 2-3 3-3 5m0 2h.01"/>
-                </svg>
+            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
+                <i data-feather="help-circle" class="mr-2"></i>
                 Dúvidas Frequentes
             </h2>
 
@@ -198,6 +175,9 @@
             }
         }
         updateStats();
+
+        // Feather Icons
+        feather.replace();
 
         // Botão abrir planilha
         document.getElementById('open-sheet-btn').addEventListener('click', () => {
