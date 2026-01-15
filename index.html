@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUPREM3 | Drag Racing: Streets</title>
-    
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -29,30 +28,38 @@
         }
     </script>
 </head>
-
 <body class="bg-asphalt text-gray-200 min-h-screen font-sans">
     <custom-header></custom-header>
-    
+
     <main class="container mx-auto px-4 py-8">
-        
+
+        <!-- Seção Principal -->
         <section class="mb-12 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 text-primary">SUPREM3 RACING</h1>
             <p class="text-xl text-gray-400 max-w-2xl mx-auto">Equipe focada em bosses e bandeiras</p>
         </section>
 
+        <!-- Estatísticas -->
         <section class="mb-12">
-            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
-                <i data-feather="bar-chart-2" class="mr-2"></i>
+            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center gap-2">
+                <!-- Bar Chart Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3v18h18"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 18V9m4 9V5m4 13v-4"/>
+                </svg>
                 Estatísticas da Equipe
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
                     <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-ambar bg-opacity-20 mr-4">
-                            <i data-feather="award" class="text-yellow"></i>
+                            <!-- Award Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M12 22l4-8-4-8-4 8 4 8z"/>
+                            </svg>
                         </div>
-                        <h3 class="text-x1 font-semibold">Bosses Concluídos</h3>
+                        <h3 class="text-xl font-semibold">Bosses Concluídos</h3>
                     </div>
                     <p id="bosses" class="text-4xl font-bold">Loading...</p>
                     <p class="text-gray-400 mt-2">Em 2026</p>
@@ -61,7 +68,10 @@
                 <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
                     <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-primary bg-opacity-20 mr-4">
-                            <i data-feather="users" class="text-primary"></i>
+                            <!-- Users Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M12 12a4 4 0 100-8 4 4 0 000 8z"/>
+                            </svg>
                         </div>
                         <h3 class="text-xl font-semibold">Membros Ativos</h3>
                     </div>
@@ -72,7 +82,11 @@
                 <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
                     <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-green bg-opacity-20 mr-4">
-                            <i data-feather="dollar-sign" class="text-green"></i>
+                            <!-- Dollar Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.333 0-2 .667-2 2s.667 2 2 2 2 .667 2 2-.667 2-2 2"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v4m0 12v4m0-16h-4m4 0h4m-4 8h-4m4 0h4"/>
+                            </svg>
                         </div>
                         <h3 class="text-xl font-semibold">Doações</h3>
                     </div>
@@ -82,23 +96,33 @@
             </div>
         </section>
 
-       <section class="mb-12">
-            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
-                <i data-feather="calendar" class="mr-2"></i>
+        <!-- Agenda semanal -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center gap-2">
+                <!-- Calendar Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
                 Agenda semanal
             </h2>
 
             <div class="bg-card rounded-lg shadow-xl overflow-hidden border border-gray-800">
                 <div class="p-4 bg-card border-b border-card flex items-center justify-between">
-                    <div class="flex items-center">
-                        <i data-feather="clock" class="text-primary mr-2"></i>
+                    <div class="flex items-center gap-2">
+                        <!-- Clock Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2M12 3a9 9 0 110 18 9 9 0 010-18z"/>
+                        </svg>
                         <span class="font-medium">Lista de bosses</span>
                     </div>
 
                     <button
                         id="open-sheet-btn"
                         class="flex items-center gap-2 bg-primary text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
-                        <i data-feather="external-link"></i>
+                        <!-- External Link Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14l11-11"/>
+                        </svg>
                         Abrir em nova aba
                     </button>
                 </div>
@@ -116,98 +140,72 @@
             </div>
         </section>
 
+        <!-- FAQ -->
         <section class="mb-12">
-            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
-                <i data-feather="help-circle" class="mr-2"></i>
+            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center gap-2">
+                <!-- Help Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9a3 3 0 116 0c0 2-3 3-3 5m0 2h.01"/>
+                </svg>
                 Dúvidas Frequentes
             </h2>
-            
+
             <div class="space-y-4">
                 <div class="bg-card p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-semibold mb-2">Como fazer bosses abertos?</h3>
                     <p class="text-gray-400">Os bosses em aberto são livres para que cada membro busque a pontuação de primeiro ou segundo lugar. Pedimos que evite ultrapassar essas marcas para garantir que todos os integrantes tenham a oportunidade de participar.</p>
                 </div>
-                
+
                 <div class="bg-card p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-semibold mb-2">Como funciona a agenda?</h3>
                     <p class="text-gray-400">A agenda se atualiza todas as manhãs de domingo, mudando os bosses de cada dupla. Ao finalizar um boss, você e sua dupla trocam de posição. A cada semana, haverá uma alternância entre o primeiro e o segundo lugar entre as duplas.</p>
                 </div>
-                
+
                 <div class="bg-card p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-semibold mb-2">Como funciona o sistema de doações?</h3>
                     <p class="text-gray-400">As doações são obrigatórias e os valores estão detalhados no topo do site. Em caso de atraso ou descumprimento do prazo, será emitido um aviso e, posteriormente, aplicada uma multa caso a pendência não seja regularizada dentro do novo período definido.</p>
                 </div>
+
                 <div class="bg-card p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-semibold mb-2">Como realizar os bosses corretamente?</h3>
                     <p class="text-gray-400">Na planilha acima, você encontrará o boss, o nome dos responsáveis pelo primeiro e segundo lugares com suas respectivas pontuações, além da pontuação mínima exigida. Localize seu nickname na tabela: se estiver na coluna de "Primeiro Lugar", você deve atingir a pontuação indicada à direita do seu nome (o mesmo vale para o Segundo Lugar). Nos bosses em que você não estiver escalado nas posições principais, basta atingir a pontuação mínima indicada na penúltima coluna da tabela.</p>
                 </div>
             </div>
         </section>
+
     </main>
 
     <custom-footer></custom-footer>
 
+    <!-- Scripts -->
     <script src="components/header.js"></script>
     <script src="components/footer.js"></script>
     <script src="script.js"></script>
 
-    <!-- Script para atualizar os números automaticamente via Apps Script JSON -->
     <script>
-    async function updateStats() {
-        const url = "https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec"; // substitua pelo link do Apps Script
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            
-            document.getElementById('members').textContent = data.members;
-            document.getElementById('bosses').textContent = data.bosses;
-            document.getElementById('donations').textContent = `$${data.donations}`;
-        } catch (err) {
-            console.error("Erro ao atualizar estatísticas:", err);
+        // Atualiza os números via Apps Script JSON
+        async function updateStats() {
+            const url = "https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec";
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                document.getElementById('members').textContent = data.members;
+                document.getElementById('bosses').textContent = data.bosses;
+                document.getElementById('donations').textContent = `$${data.donations}`;
+            } catch (err) {
+                console.error("Erro ao atualizar estatísticas:", err);
+            }
         }
-    }
+        updateStats();
 
-    updateStats();
-    </script>
-
-    <script>
-        feather.replace();
-    </script>
-        <script>
+        // Botão abrir planilha
         document.getElementById('open-sheet-btn').addEventListener('click', () => {
             window.open(
                 "https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1797724220&single=true",
                 "_blank"
             );
         });
-
-        feather.replace();
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
