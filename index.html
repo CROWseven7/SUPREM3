@@ -59,47 +59,57 @@
 
         <!-- Estatísticas -->
         <section class="mb-12">
-            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
-                <i data-feather="bar-chart-2" class="mr-2"></i>
-                Estatísticas da Equipe
-            </h2>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="p-3 rounded-full bg-ambar bg-opacity-20 mr-4">
-                            <i data-feather="award" class="text-yellow"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold">Bosses Concluídos</h3>
-                    </div>
-                    <p id="bosses" class="text-4xl font-bold">Loading...</p>
-                    <p class="text-gray-400 mt-2">Em 2026</p>
-                </div>
-
-                <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="p-3 rounded-full bg-primary bg-opacity-20 mr-4">
-                            <i data-feather="users" class="text-primary"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold">Membros Ativos</h3>
-                    </div>
-                    <p id="members" class="text-4xl font-bold">Loading...</p>
-                    <p class="text-gray-400 mt-2">Pilotos na equipe</p>
-                </div>
-
-                <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="p-3 rounded-full bg-green bg-opacity-20 mr-4">
-                            <i data-feather="dollar-sign" class="text-green"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold">Doações</h3>
-                    </div>
-                    <p id="donations" class="text-4xl font-bold">Loading...</p>
-                    <p class="text-gray-400 mt-2">Por semana para a equipe</p>
-                </div>
-
+    <!-- Bloco 1 -->
+    <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
+        <div class="flex items-center mb-4">
+            <div class="p-3 rounded-full bg-ambar bg-opacity-20 mr-4">
+                <i data-feather="award" class="text-yellow"></i>
             </div>
+            <h3 class="text-xl font-semibold">Bosses Concluídos</h3>
+        </div>
+        <p id="bosses" class="text-4xl font-bold">Loading...</p>
+        <p class="text-gray-400 mt-2">Em 2026</p>
+    </div>
+
+    <!-- Bloco 2 -->
+    <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
+        <div class="flex items-center mb-4">
+            <div class="p-3 rounded-full bg-primary bg-opacity-20 mr-4">
+                <i data-feather="users" class="text-primary"></i>
+            </div>
+            <h3 class="text-xl font-semibold">Membros Ativos</h3>
+        </div>
+        <p id="members" class="text-4xl font-bold">Loading...</p>
+        <p class="text-gray-400 mt-2">Pilotos na equipe</p>
+    </div>
+
+    <!-- Bloco 3 -->
+    <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
+        <div class="flex items-center mb-4">
+            <div class="p-3 rounded-full bg-green bg-opacity-20 mr-4">
+                <i data-feather="dollar-sign" class="text-green"></i>
+            </div>
+            <h3 class="text-xl font-semibold">Doações</h3>
+        </div>
+        <p id="donations" class="text-4xl font-bold">Loading...</p>
+        <p class="text-gray-400 mt-2">Por semana para a equipe</p>
+    </div>
+
+    <!-- 🔹 Barra de Bosses Semanais -->
+    <div class="col-span-1 md:col-span-3 bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
+        <h3 class="text-xl font-semibold mb-2 text-white drop-shadow-[0_0_4px_#bfbfbf,0_0_8px_#bfbfbf,0_0_16px_#bfbfbf,0_0_32px_#bfbfbf,0_0_64px_#bfbfbf]">
+            Semana atual
+        </h3>
+        <div class="w-full bg-card rounded-full h-8 border border-gray-700 overflow-hidden">
+            <div id="weeklyBar" class="h-full w-0 rounded-full transition-all duration-500"></div>
+        </div>
+        <p id="weeklyText" class="mt-1 text-gray-400">0/30 bosses</p>
+    </div>
+
+</div>
+
         </section>
 
         <!-- Agenda semanal -->
@@ -266,20 +276,46 @@
             });
         });
     </script>
+<script>
+async function updateWeeklyBar() {
+    try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exechttps://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec");
+        const data = await response.json();
+
+        const weekly = data.bossesSemana || 0; // bosses da semana
+        const maxWeekly = 30;
+        const percentage = Math.min(weekly / maxWeekly * 100, 100);
+
+        const bar = document.getElementById('weeklyBar');
+        const text = document.getElementById('weeklyText');
+
+        // largura da barra
+        bar.style.width = percentage + "%";
+
+        // cor dinâmica com neon
+        if (percentage < 25) {
+            bar.style.backgroundColor = "#ff0000";
+            bar.style.boxShadow = "0 0 4px #ff0000,0 0 8px #ff0000,0 0 16px #ff0000,0 0 32px #ff0000,0 0 64px #ff0000";
+        } else if (percentage < 50) {
+            bar.style.backgroundColor = "#ff7f00";
+            bar.style.boxShadow = "0 0 4px #ff7f00,0 0 8px #ff7f00,0 0 16px #ff7f00,0 0 32px #ff7f00,0 0 64px #ff7f00";
+        } else if (percentage < 75) {
+            bar.style.backgroundColor = "#edff00";
+            bar.style.boxShadow = "0 0 4px #edff00,0 0 8px #edff00,0 0 16px #edff00,0 0 32px #edff00,0 0 64px #edff00";
+        } else {
+            bar.style.backgroundColor = "#00d105";
+            bar.style.boxShadow = "0 0 4px #00d105,0 0 8px #00d105,0 0 16px #00d105,0 0 32px #00d105,0 0 64px #00d105";
+        }
+
+        text.textContent = `${weekly}/${maxWeekly} bosses`;
+    } catch(err) {
+        console.error("Erro ao atualizar barra semanal:", err);
+    }
+}
+
+// chama ao carregar a página
+updateWeeklyBar();
+</script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
