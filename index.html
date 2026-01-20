@@ -46,6 +46,11 @@
 </head>
 
 <body class="bg-asphalt text-gray-200 min-h-screen font-sans">
+<!-- ⚙️ Botão de Configurações -->
+<button id="gearBtn"
+  class="fixed top-4 left-4 z-50 bg-card border border-gray-800 p-3 rounded-full shadow-lg transition-all duration-300">
+  <i data-feather="settings"></i>
+</button>
 
     <custom-header></custom-header>
 
@@ -252,29 +257,88 @@
     <script src="script.js"></script>
 
     <script>
-        async function updateStats() {
-            const url = "https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec";
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
+async function atualizarTudo() {
+    const url = "https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec";
 
-                document.getElementById('members').textContent = data.members;
-                document.getElementById('bosses').textContent = data.bosses;
-                document.getElementById('donations').textContent = `$${data.donations}`;
-            } catch (err) {
-                console.error("Erro ao atualizar estatísticas:", err);
-            }
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        // 🔹 Topo do site
+        document.getElementById('members').textContent = data.members ?? 0;
+        document.getElementById('donations').textContent = `$${data.donations ?? 0}`;
+        document.getElementById('bosses').textContent = data.bosses ?? 0;
+
+        // 🔹 Barra da semana
+        const weekly = data.bossesSemana ?? 0;
+        const maxWeekly = 30;
+        const percentage = Math.min(weekly / maxWeekly * 100, 100);
+        const bar = document.getElementById('weeklyBar');
+        const text = document.getElementById('weeklyText');
+        bar.style.width = percentage + "%";
+        text.textContent = `${weekly}/${maxWeekly} bosses`;
+
+        // cores dinâmicas
+        if (percentage < 25) {
+            bar.style.backgroundColor = "#ff0000";
+            bar.style.boxShadow = "0 0 4px #ff0000,0 0 8px #ff0000,0 0 16px #ff0000,0 0 32px #ff0000,0 0 64px #ff0000";
+        } else if (percentage < 50) {
+            bar.style.backgroundColor = "#ff7f00";
+            bar.style.boxShadow = "0 0 4px #ff7f00,0 0 8px #ff7f00,0 0 16px #ff7f00,0 0 32px #ff7f00,0 0 64px #ff7f00";
+        } else if (percentage < 75) {
+            bar.style.backgroundColor = "#edff00";
+            bar.style.boxShadow = "0 0 4px #edff00,0 0 8px #edff00,0 0 16px #edff00,0 0 32px #edff00,0 0 64px #edff00";
+        } else {
+            bar.style.backgroundColor = "#00d105";
+            bar.style.boxShadow = "0 0 4px #00d105,0 0 8px #00d105,0 0 16px #00d105,0 0 32px #00d105,0 0 64px #00d105";
         }
 
-        updateStats();
+        // 🔹 Painel de controle
+        const bossContainer = document.getElementById("bossCards");
+        Object.keys(data.bossesPainel ?? {}).forEach(key => {
+            let el = document.getElementById(`${key}-value`);
+            if (el) {
+                el.textContent = data.bossesPainel[key];
+            } else {
+                // se não existir ainda, cria card
+                const card = document.createElement("div");
+                card.className = "bg-card p-6 rounded-lg border border-gray-800 text-center";
+                card.innerHTML = `
+                    <p class="text-4xl font-bold mb-2" id="${key}-value">${data.bossesPainel[key]}</p>
+                    <p class="text-gray-400 mb-4">${key.replace('boss','Boss ')}</p>
+                    <div class="flex justify-between items-center">
+                        <button class="minus bg-gray-700 px-4 py-2 rounded">−</button>
+                        <button class="plus bg-gray-700 px-4 py-2 rounded">+</button>
+                    </div>
+                `;
+                bossContainer.appendChild(card);
 
-        feather.replace();
-
-        document.querySelectorAll('.open-sheet').forEach(btn => {
-            btn.addEventListener('click', () => {
-                window.open(btn.dataset.url, "_blank");
-            });
+                // adiciona funcionalidade + e -
+                const number = card.querySelector(`#${key}-value`);
+                const minus = card.querySelector(".minus");
+                const plus = card.querySelector(".plus");
+                let cooldown = false;
+                function update(delta) {
+                    if (cooldown) return;
+                    let val = parseInt(number.textContent) || 0;
+                    val = Math.max(0, val + delta);
+                    number.textContent = val;
+                    cooldown = true;
+                    setTimeout(() => cooldown = false, 1000);
+                    // 🔜 futuramente envia para Apps Script
+                }
+                minus.onclick = () => update(-1);
+                plus.onclick = () => update(1);
+            }
         });
+
+    } catch (err) {
+        console.error("Erro ao atualizar tudo:", err);
+    }
+}
+
+// chama ao carregar a página
+atualizarTudo();
     </script>
 <script>
 async function updateWeeklyBar() {
@@ -316,6 +380,193 @@ async function updateWeeklyBar() {
 // chama ao carregar a página
 updateWeeklyBar();
 </script>
+
+<!-- 🔒 Popup de senha -->
+<div id="passwordModal"
+  class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
+  <div class="bg-card p-6 rounded-lg border border-gray-800 w-[90%] max-w-sm relative">
+    <!-- Botão de fechar -->
+    <button id="closePasswordModal" class="absolute top-2 right-2 text-gray-400 hover:text-white font-bold text-lg">&times;</button>
+
+    <h2 class="text-xl font-semibold mb-4 text-center">Acesso Restrito</h2>
+    <input id="passwordInput" type="password" placeholder="Digite a senha"
+      class="w-full p-3 rounded bg-asphalt border border-gray-700 mb-3 text-white">
+    <p id="passwordError" class="text-red-500 text-sm hidden">Senha incorreta</p>
+    <button id="passwordConfirm"
+      class="w-full mt-3 bg-primary text-black py-2 rounded font-semibold">
+      Entrar
+    </button>
+  </div>
+</div>
+
+
+<!-- 📊 Painel de Controle -->
+<div id="editorModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-70 backdrop-blur-sm p-4">
+  <div class="bg-card max-w-4xl mx-auto p-6 rounded-lg border border-gray-800 relative">
+    <!-- Botão de fechar -->
+    <button id="closeEditorModal" class="absolute top-2 right-2 text-gray-400 hover:text-white font-bold text-lg">&times;</button>
+
+    <h2 class="text-2xl font-bold mb-6 neon">Painel de Controle da Equipe</h2>
+
+    <!-- Bosses -->
+    <h3 class="text-xl font-semibold mb-4">Bosses da Semana</h3>
+    <div id="bossCards" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"></div>
+
+    <!-- Membros e Doação -->
+    <h3 class="text-xl font-semibold mb-4">Equipe & Finanças</h3>
+    <div id="extraCards" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+  </div>
+</div>
+
+
+
+<script>
+/* ⚙️ Scroll show/hide */
+let lastScroll = 0;
+const gearBtn = document.getElementById("gearBtn");
+
+window.addEventListener("scroll", () => {
+  const current = window.scrollY;
+  if (current > lastScroll) {
+    gearBtn.style.opacity = "0";
+    gearBtn.style.pointerEvents = "none";
+  } else {
+    gearBtn.style.opacity = "1";
+    gearBtn.style.pointerEvents = "auto";
+  }
+  lastScroll = current;
+});
+
+/* 🔒 Abrir senha */
+gearBtn.onclick = () => {
+  document.getElementById("passwordModal").classList.remove("hidden");
+};
+
+document.getElementById("passwordConfirm").onclick = async () => {
+  const input = document.getElementById("passwordInput");
+  if (input.value === "1234") {
+    document.getElementById("passwordModal").classList.add("hidden");
+    document.getElementById("editorModal").classList.remove("hidden");
+
+    const bossContainer = document.getElementById("bossCards");
+    bossContainer.innerHTML = ""; // limpa antes de criar
+
+    // 🔹 Cria os 10 cards de bosses com limite 0 a 4
+    for (let i = 1; i <= 10; i++) {
+      const card = document.createElement("div");
+      card.className = "bg-card p-6 rounded-lg border border-gray-800 text-center";
+      card.innerHTML = `
+        <p class="text-4xl font-bold mb-2" id="boss${i}-value">Loading...</p>
+        <p class="text-gray-400 mb-4">Boss ${i}</p>
+        <div class="flex justify-between items-center">
+          <button class="minus bg-gray-700 px-4 py-2 rounded">−</button>
+          <button class="plus bg-gray-700 px-4 py-2 rounded">+</button>
+        </div>
+      `;
+      bossContainer.appendChild(card);
+
+      // adiciona funcionalidade + e -
+      const number = card.querySelector(`#boss${i}-value`);
+      const minus = card.querySelector(".minus");
+      const plus = card.querySelector(".plus");
+      let cooldown = false;
+
+      function update(delta) {
+        if (cooldown) return;
+        let val = parseInt(number.textContent) || 0;
+        val = Math.min(4, Math.max(0, val + delta)); // 🔹 limite 0–4
+        number.textContent = val;
+        cooldown = true;
+        setTimeout(() => cooldown = false, 1000);
+        // 🔜 futuramente: enviar alteração para Apps Script
+      }
+
+      minus.onclick = () => update(-1);
+      plus.onclick = () => update(1);
+    }
+
+    // 🔹 Membros e Doações
+    const extraCards = document.getElementById("extraCards");
+    extraCards.innerHTML = ""; // limpa antes de criar
+
+    function createExtraCard(id, title, min, max, step) {
+      const card = document.createElement("div");
+      card.className = "bg-card p-6 rounded-lg border border-gray-800 text-center";
+      card.innerHTML = `
+        <p class="text-4xl font-bold mb-2" id="${id}">Loading...</p>
+        <p class="text-gray-400 mb-4">${title}</p>
+        <div class="flex justify-between items-center">
+          <button class="minus bg-gray-700 px-4 py-2 rounded">−</button>
+          <button class="plus bg-gray-700 px-4 py-2 rounded">+</button>
+        </div>
+      `;
+      extraCards.appendChild(card);
+
+      const number = card.querySelector(`#${id}`);
+      const minus = card.querySelector(".minus");
+      const plus = card.querySelector(".plus");
+      let cooldown = false;
+
+      function update(delta) {
+        if (cooldown) return;
+        let val = parseInt(number.textContent) || 0;
+        val = Math.min(max, Math.max(min, val + delta));
+        number.textContent = val;
+        cooldown = true;
+        setTimeout(() => cooldown = false, 500);
+      }
+
+      minus.onclick = () => update(-step);
+      plus.onclick = () => update(step);
+    }
+
+    // cria cards extras
+    createExtraCard("panel-members", "Membros Ativos", 1, 20, 1);
+    createExtraCard("panel-donations", "Doações Semanais", 0, 1000, 50);
+
+    // 🔹 Busca os valores reais do Apps Script
+    try {
+      const url = "https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec";
+      const response = await fetch(url);
+      const data = await response.json();
+
+      // Atualiza bosses
+      Object.keys(data.bossesPainel).forEach(key => {
+        const el = document.getElementById(`${key}-value`);
+        if (el) el.textContent = data.bossesPainel[key];
+      });
+
+      // Atualiza membros e doações
+      document.getElementById("panel-members").textContent = data.members ?? 0;
+      document.getElementById("panel-donations").textContent = data.donations ?? 0;
+
+    } catch(err) {
+      console.error("Erro ao carregar painel de bosses/membros/doações:", err);
+    }
+
+  } else {
+    document.getElementById("passwordError").classList.remove("hidden");
+  }
+};
+// Fechar modal de senha
+document.getElementById("closePasswordModal").onclick = () => {
+  document.getElementById("passwordModal").classList.add("hidden");
+  document.getElementById("passwordError").classList.add("hidden"); // esconde mensagem de erro
+  document.getElementById("passwordInput").value = ""; // limpa input
+};
+
+// Fechar painel de controle
+document.getElementById("closeEditorModal").onclick = () => {
+  document.getElementById("editorModal").classList.add("hidden");
+};
+
+</script>
+
+<script>
+  // Inicializa todos os ícones Feather
+  feather.replace();
+</script>
+
 
 </body>
 </html>
