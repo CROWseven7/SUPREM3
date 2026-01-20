@@ -107,11 +107,50 @@
         <h3 class="text-xl font-semibold mb-2 text-white drop-shadow-[0_0_4px_#bfbfbf,0_0_8px_#bfbfbf,0_0_16px_#bfbfbf,0_0_32px_#bfbfbf,0_0_64px_#bfbfbf]">
             Semana atual
         </h3>
-        <div class="w-full bg-card rounded-full h-8 border border-gray-700 overflow-hidden">
+        <div class="w-full bg-asphalt rounded-full h-8 border border-gray-700 overflow-hidden">
             <div id="weeklyBar" class="h-full w-0 rounded-full transition-all duration-500"></div>
         </div>
         <p id="weeklyText" class="mt-1 text-gray-400">0/30 bosses</p>
     </div>
+    
+<!-- ⏱️ Timer & Ronda Atual -->
+<div class="col-span-1 md:col-span-3 bg-card p-6 rounded-lg border border-gray-800 shadow-lg mt-4">
+  
+  <div class="flex flex-col md:flex-row gap-4 items-stretch">
+
+    <!-- TIMER -->
+    <div class="flex-1 md:flex-[3] bg-asphalt border border-gray-700 rounded-lg p-4 text-center">
+      <h3 id="timerTitle" class="text-xl font-semibold"></h3>
+      <p id="timerSubtitle" class="text-sm text-gray-400 mb-3"></p>
+
+      <div class="flex justify-center gap-4 text-center">
+        <div>
+          <p id="days" class="text-3xl font-bold">00</p>
+          <span class="text-xs text-gray-400">Dias</span>
+        </div>
+        <div>
+          <p id="hours" class="text-3xl font-bold">00</p>
+          <span class="text-xs text-gray-400">Horas</span>
+        </div>
+        <div>
+          <p id="minutes" class="text-3xl font-bold">00</p>
+          <span class="text-xs text-gray-400">Min</span>
+        </div>
+        <div>
+          <p id="seconds" class="text-3xl font-bold">00</p>
+          <span class="text-xs text-gray-400">Seg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RONDA -->
+    <div class="flex-1 md:flex-[1] bg-asphalt border border-gray-700 rounded-lg p-4 flex flex-col justify-center items-center text-center">
+      <p class="text-xl font-semibold ">Ronda atual</p>
+      <p id="roundValue" class="text-4xl font-bold text-gray-100">—</p>
+    </div>
+
+  </div>
+</div>
 
 </div>
 
@@ -580,6 +619,85 @@ document.getElementById("closeEditorModal").onclick = () => {
 <script>
   // Inicializa todos os ícones Feather
   feather.replace();
+</script>
+
+<script>
+function getBrasiliaNow() {
+  const now = new Date();
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  return new Date(utc - (3 * 60 * 60 * 1000)); // GMT-3
+}
+
+function nextDate(dayOffset, hour) {
+  const d = getBrasiliaNow();
+  d.setDate(d.getDate() + dayOffset);
+  d.setHours(hour, 0, 0, 0);
+  return d;
+}
+
+function updateTimer() {
+  const now = getBrasiliaNow();
+  const day = now.getDay(); // 0 = domingo
+
+  let target, title = "", subtitle = "", round = "—";
+
+  // 🔹 Domingo → Segunda 12h
+  if (day === 0 || (day === 1 && now.getHours() < 12)) {
+    target = nextDate(day === 0 ? 1 : 0, 12);
+    title = "Para o início das rondas";
+    subtitle = "";
+    round = "Aguardando";
+  }
+
+  // 🔹 Segunda 12h → Terça 18h (Ronda 1)
+  else if (
+    (day === 1 && now.getHours() >= 12) ||
+    (day === 2 && now.getHours() < 18)
+  ) {
+    target = day === 1 ? nextDate(1, 18) : nextDate(0, 18);
+    title = "Para o fim da primeira ronda";
+    round = "1";
+  }
+
+  // 🔹 Terça 18h → Quinta 18h (Ronda 2)
+  else if (
+    (day === 2 && now.getHours() >= 18) ||
+    day === 3 ||
+    (day === 4 && now.getHours() < 18)
+  ) {
+    target = nextDate(day === 4 ? 0 : (4 - day), 18);
+    title = "Para o fim da segunda ronda";
+    round = "2";
+  }
+
+  // 🔹 Quinta 18h → Sábado 18h (Ronda 3)
+  else {
+    target = nextDate(day === 6 ? 0 : (6 - day), 18);
+    title = "Para o fim da terceira ronda";
+    round = "3";
+  }
+
+  const diff = target - now;
+
+  const totalSeconds = Math.max(0, Math.floor(diff / 1000));
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  document.getElementById("timerTitle").textContent = title;
+  document.getElementById("timerSubtitle").textContent = subtitle;
+
+  document.getElementById("days").textContent = String(days).padStart(2, "0");
+  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+
+  document.getElementById("roundValue").textContent = round;
+}
+
+updateTimer();
+setInterval(updateTimer, 1000);
 </script>
 
 
