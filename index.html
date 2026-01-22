@@ -46,11 +46,11 @@
 </head>
 
 <body class="bg-asphalt text-gray-200 min-h-screen font-sans">
-<!-- ⚙️ Botão de Configurações -->
-<button id="gearBtn"
-  class="fixed top-4 left-4 z-50 bg-card border border-gray-800 p-3 rounded-full shadow-lg transition-all duration-300">
-  <i data-feather="settings"></i>
-</button>
+    <!-- ⚙️ Botão de Configurações -->
+    <button id="gearBtn"
+        class="fixed top-4 left-4 z-50 bg-card border border-gray-800 p-3 rounded-full shadow-lg transition-all duration-300">
+        <i data-feather="settings"></i>
+    </button>
 
     <custom-header></custom-header>
 
@@ -66,93 +66,95 @@
         <section class="mb-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-    <!-- Bloco 1 -->
-    <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
-        <div class="flex items-center mb-4">
-            <div class="p-3 rounded-full bg-ambar bg-opacity-20 mr-4">
-                <i data-feather="award" class="text-yellow"></i>
+                <!-- Bloco 1 -->
+                <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-ambar bg-opacity-20 mr-4">
+                            <i data-feather="award" class="text-yellow"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Bosses Concluídos</h3>
+                    </div>
+                    <p id="bosses" class="text-4xl font-bold">Loading...</p>
+                    <p class="text-gray-400 mt-2">Em 2026</p>
+                </div>
+
+                <!-- Bloco 2 -->
+                <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-primary bg-opacity-20 mr-4">
+                            <i data-feather="users" class="text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Membros Ativos</h3>
+                    </div>
+                    <p id="members" class="text-4xl font-bold">Loading...</p>
+                    <p class="text-gray-400 mt-2">Pilotos na equipe</p>
+                </div>
+
+                <!-- Bloco 3 -->
+                <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-green bg-opacity-20 mr-4">
+                            <i data-feather="dollar-sign" class="text-green"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Doações</h3>
+                    </div>
+                    <p id="donations" class="text-4xl font-bold">Loading...</p>
+                    <p class="text-gray-400 mt-2">Por semana para a equipe</p>
+                </div>
+
+                <!-- 🔹 Barra de Bosses Semanais -->
+                <div class="col-span-1 md:col-span-3 bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
+                    <h3
+                        class="text-xl font-semibold mb-2 text-white drop-shadow-[0_0_4px_#bfbfbf,0_0_8px_#bfbfbf,0_0_16px_#bfbfbf,0_0_32px_#bfbfbf,0_0_64px_#bfbfbf]">
+                        Semana atual
+                    </h3>
+                    <div class="w-full bg-asphalt rounded-full h-8 border border-gray-700 overflow-hidden">
+                        <div id="weeklyBar" class="h-full w-0 rounded-full transition-all duration-500"></div>
+                    </div>
+                    <p id="weeklyText" class="mt-1 text-gray-400">0/30 bosses</p>
+                </div>
+
+                <!-- ⏱️ Timer & Ronda Atual -->
+                <div class="col-span-1 md:col-span-3 bg-card p-6 rounded-lg border border-gray-800 shadow-lg mt-4">
+
+                    <div class="flex flex-col md:flex-row gap-4 items-stretch">
+
+                        <!-- TIMER -->
+                        <div class="flex-1 md:flex-[3] bg-asphalt border border-gray-700 rounded-lg p-4 text-center">
+                            <h3 id="timerTitle" class="text-xl font-semibold"></h3>
+                            <p id="timerSubtitle" class="text-sm text-gray-400 mb-3"></p>
+
+                            <div class="flex justify-center gap-4 text-center">
+                                <div>
+                                    <p id="days" class="text-3xl font-bold">00</p>
+                                    <span class="text-xs text-gray-400">Dias</span>
+                                </div>
+                                <div>
+                                    <p id="hours" class="text-3xl font-bold">00</p>
+                                    <span class="text-xs text-gray-400">Horas</span>
+                                </div>
+                                <div>
+                                    <p id="minutes" class="text-3xl font-bold">00</p>
+                                    <span class="text-xs text-gray-400">Min</span>
+                                </div>
+                                <div>
+                                    <p id="seconds" class="text-3xl font-bold">00</p>
+                                    <span class="text-xs text-gray-400">Seg</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RONDA -->
+                        <div
+                            class="flex-1 md:flex-[1] bg-asphalt border border-gray-700 rounded-lg p-4 flex flex-col justify-center items-center text-center">
+                            <p class="text-xl font-semibold ">Ronda atual</p>
+                            <p id="roundValue" class="text-4xl font-bold text-gray-100">—</p>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-            <h3 class="text-xl font-semibold">Bosses Concluídos</h3>
-        </div>
-        <p id="bosses" class="text-4xl font-bold">Loading...</p>
-        <p class="text-gray-400 mt-2">Em 2026</p>
-    </div>
-
-    <!-- Bloco 2 -->
-    <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
-        <div class="flex items-center mb-4">
-            <div class="p-3 rounded-full bg-primary bg-opacity-20 mr-4">
-                <i data-feather="users" class="text-primary"></i>
-            </div>
-            <h3 class="text-xl font-semibold">Membros Ativos</h3>
-        </div>
-        <p id="members" class="text-4xl font-bold">Loading...</p>
-        <p class="text-gray-400 mt-2">Pilotos na equipe</p>
-    </div>
-
-    <!-- Bloco 3 -->
-    <div class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
-        <div class="flex items-center mb-4">
-            <div class="p-3 rounded-full bg-green bg-opacity-20 mr-4">
-                <i data-feather="dollar-sign" class="text-green"></i>
-            </div>
-            <h3 class="text-xl font-semibold">Doações</h3>
-        </div>
-        <p id="donations" class="text-4xl font-bold">Loading...</p>
-        <p class="text-gray-400 mt-2">Por semana para a equipe</p>
-    </div>
-
-    <!-- 🔹 Barra de Bosses Semanais -->
-    <div class="col-span-1 md:col-span-3 bg-card p-6 rounded-lg border border-gray-800 shadow-lg">
-        <h3 class="text-xl font-semibold mb-2 text-white drop-shadow-[0_0_4px_#bfbfbf,0_0_8px_#bfbfbf,0_0_16px_#bfbfbf,0_0_32px_#bfbfbf,0_0_64px_#bfbfbf]">
-            Semana atual
-        </h3>
-        <div class="w-full bg-asphalt rounded-full h-8 border border-gray-700 overflow-hidden">
-            <div id="weeklyBar" class="h-full w-0 rounded-full transition-all duration-500"></div>
-        </div>
-        <p id="weeklyText" class="mt-1 text-gray-400">0/30 bosses</p>
-    </div>
-    
-<!-- ⏱️ Timer & Ronda Atual -->
-<div class="col-span-1 md:col-span-3 bg-card p-6 rounded-lg border border-gray-800 shadow-lg mt-4">
-  
-  <div class="flex flex-col md:flex-row gap-4 items-stretch">
-
-    <!-- TIMER -->
-    <div class="flex-1 md:flex-[3] bg-asphalt border border-gray-700 rounded-lg p-4 text-center">
-      <h3 id="timerTitle" class="text-xl font-semibold"></h3>
-      <p id="timerSubtitle" class="text-sm text-gray-400 mb-3"></p>
-
-      <div class="flex justify-center gap-4 text-center">
-        <div>
-          <p id="days" class="text-3xl font-bold">00</p>
-          <span class="text-xs text-gray-400">Dias</span>
-        </div>
-        <div>
-          <p id="hours" class="text-3xl font-bold">00</p>
-          <span class="text-xs text-gray-400">Horas</span>
-        </div>
-        <div>
-          <p id="minutes" class="text-3xl font-bold">00</p>
-          <span class="text-xs text-gray-400">Min</span>
-        </div>
-        <div>
-          <p id="seconds" class="text-3xl font-bold">00</p>
-          <span class="text-xs text-gray-400">Seg</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- RONDA -->
-    <div class="flex-1 md:flex-[1] bg-asphalt border border-gray-700 rounded-lg p-4 flex flex-col justify-center items-center text-center">
-      <p class="text-xl font-semibold ">Ronda atual</p>
-      <p id="roundValue" class="text-4xl font-bold text-gray-100">—</p>
-    </div>
-
-  </div>
-</div>
-
-</div>
 
         </section>
 
@@ -170,13 +172,12 @@
                         <i data-feather="clock" class="text-primary mr-2"></i>
                         <span class="font-medium">Lista de bosses</span>
                     </div>
-
-                    <button class="open-sheet"
-                        data-url="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1797724220&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false"
-                        class="flex items-center gap-2 bg-primary text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
+                    <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1797724220&single=true&widget=false&headers=false&chrome=false"
+                        target="_blank" rel="noopener"
+                        class="flex items-center gap-2 bg-card text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-stone-950 transition">
                         <i data-feather="external-link"></i>
                         Abrir em nova aba
-                    </button>
+                    </a>
                 </div>
 
                 <div class="p-1">
@@ -203,13 +204,12 @@
                         <i data-feather="info" class="text-primary mr-2"></i>
                         <span class="font-medium">Avisos da equipe</span>
                     </div>
-
-                    <button class="open-sheet"
-                        data-url="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1651059618&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false"
-                        class="flex items-center gap-2 bg-primary text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
+                    <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1651059618&single=true&widget=false&headers=false&chrome=false"
+                        target="_blank" rel="noopener"
+                        class="flex items-center gap-2 bg-card text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-stone-950 transition">
                         <i data-feather="external-link"></i>
                         Abrir em nova aba
-                    </button>
+                    </a>
                 </div>
 
                 <div class="p-1">
@@ -221,71 +221,82 @@
                 </div>
             </div>
         </section>
-        
-    <!-- FAQ -->
-<section class="mb-12">
-  <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
-    <i data-feather="help-circle" class="mr-2"></i> Dúvidas Frequentes
-  </h2>
 
-  <div class="space-y-4">
+        <!-- FAQ -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
+                <i data-feather="help-circle" class="mr-2"></i> Dúvidas Frequentes
+            </h2>
 
-    <div class="bg-card p-6 rounded-lg border border-gray-800">
-      <h3 class="text-xl font-semibold mb-2">Como fazer bosses em aberto?</h3>
-      <p class="text-gray-400">
-        Os bosses em aberto são livres para que cada membro busque a pontuação de primeiro ou segundo lugar.
-        Pedimos que evite ultrapassar essas marcas, garantindo que todos os integrantes tenham a oportunidade de participar.
-      </p>
-    </div>
+            <div class="space-y-4">
 
-    <div class="bg-card p-6 rounded-lg border border-gray-800">
-      <h3 class="text-xl font-semibold mb-2">Como funciona a agenda?</h3>
-      <p class="text-gray-400">
-        A agenda é atualizada todas as manhãs de domingo, alterando os bosses de cada dupla.
-        Ao finalizar um boss, você e sua dupla trocam de posição.
-        A cada semana, ocorre uma alternância entre o primeiro e o segundo lugar entre as duplas.
-      </p>
-    </div>
+                <div class="bg-card p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-2">Como fazer bosses em aberto?</h3>
+                    <p class="text-gray-400">
+                        Os bosses em aberto são livres para que cada membro busque a pontuação de primeiro ou segundo
+                        lugar.
+                        Pedimos que evite ultrapassar essas marcas, garantindo que todos os integrantes tenham a
+                        oportunidade de participar.
+                    </p>
+                </div>
 
-    <div class="bg-card p-6 rounded-lg border border-gray-800">
-      <h3 class="text-xl font-semibold mb-2">Como funciona o sistema de doações?</h3>
-      <p class="text-gray-400">
-        As doações são obrigatórias, e os valores estão detalhados no topo do site.
-        Em caso de atraso ou descumprimento do prazo, será emitido um aviso.
-        Caso a pendência não seja regularizada dentro do novo período definido, será aplicada uma multa.
-      </p>
-    </div>
+                <div class="bg-card p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-2">Como funciona a agenda?</h3>
+                    <p class="text-gray-400">
+                        A agenda é atualizada todas as manhãs de domingo, alterando os bosses de cada dupla.
+                        Ao finalizar um boss, você e sua dupla trocam de posição.
+                        A cada semana, ocorre uma alternância entre o primeiro e o segundo lugar entre as duplas.
+                    </p>
+                </div>
 
-    <div class="bg-card p-6 rounded-lg border border-gray-800">
-      <h3 class="text-xl font-semibold mb-2">Como realizar os bosses corretamente?</h3>
-      <p class="text-gray-400">
-        Na planilha acima, você encontrará o boss, os responsáveis pelo primeiro e segundo lugares, com suas respectivas pontuações, além da pontuação mínima exigida.
-        Localize seu nickname na tabela: se estiver na coluna de Primeiro Lugar, você deve atingir a pontuação indicada à direita do seu nome (o mesmo vale para o Segundo Lugar).
-        Nos bosses em que você não estiver escalado nas posições principais, basta atingir a pontuação mínima indicada na penúltima coluna da tabela.
-      </p>
-    </div>
+                <div class="bg-card p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-2">Como funciona o sistema de doações?</h3>
+                    <p class="text-gray-400">
+                        As doações são obrigatórias, e os valores estão detalhados no topo do site.
+                        Em caso de atraso ou descumprimento do prazo, será emitido um aviso.
+                        Caso a pendência não seja regularizada dentro do novo período definido, será aplicada uma multa.
+                    </p>
+                </div>
 
-    <div class="bg-card p-6 rounded-lg border border-gray-800">
-      <h3 class="text-xl font-semibold mb-2">Como funcionam as rondas?</h3>
-      <p class="text-gray-400">
-        A meta da equipe é realizar 30 bosses semanais, distribuídos ao longo de 6 dias (de segunda-feira a sábado).
-        As atividades são divididas em três rondas: a primeira ocorre de segunda a terça, a segunda de quarta a quinta, e a terceira de sexta a sábado.
-        Em cada período, você deve atingir a pontuação indicada na planilha (tanto a pontuação mínima quanto a definida para o seu boss), completando 10 bosses por ronda.
-      </p>
-    </div>
+                <div class="bg-card p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-2">Como realizar os bosses corretamente?</h3>
+                    <p class="text-gray-400">
+                        Na planilha acima, você encontrará o boss, os responsáveis pelo primeiro e segundo lugares, com
+                        suas respectivas pontuações, além da pontuação mínima exigida.
+                        Localize seu nickname na tabela: se estiver na coluna de Primeiro Lugar, você deve atingir a
+                        pontuação indicada à direita do seu nome (o mesmo vale para o Segundo Lugar).
+                        Nos bosses em que você não estiver escalado nas posições principais, basta atingir a pontuação
+                        mínima indicada na penúltima coluna da tabela.
+                    </p>
+                </div>
 
-    <div class="bg-card p-6 rounded-lg border border-gray-800">
-      <h3 class="text-xl font-semibold mb-2">Como funcionam os avisos?</h3>
-      <p class="text-gray-400">
-        Todos os membros começam com zero avisos.
-        Ao deixar de pontuar em alguma ronda semanal, você recebe um aviso e a linha do seu nickname ficará amarela.
-        Caso deixe de pontuar novamente em outra ronda, receberá um segundo aviso, a linha ficará laranja e será aplicada uma multa de $600.
-        Se deixar de pontuar pela terceira vez, a coluna de banimento será preenchida e você será banido permanentemente da equipe.
-      </p>
-    </div>
+                <div class="bg-card p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-2">Como funcionam as rondas?</h3>
+                    <p class="text-gray-400">
+                        A meta da equipe é realizar 30 bosses semanais, distribuídos ao longo de 6 dias (de
+                        segunda-feira a sábado).
+                        As atividades são divididas em três rondas: a primeira ocorre de segunda a terça, a segunda de
+                        quarta a quinta, e a terceira de sexta a sábado.
+                        Em cada período, você deve atingir a pontuação indicada na planilha (tanto a pontuação mínima
+                        quanto a definida para o seu boss), completando 10 bosses por ronda.
+                    </p>
+                </div>
 
-  </div>
-</section>
+                <div class="bg-card p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-2">Como funcionam os avisos?</h3>
+                    <p class="text-gray-400">
+                        Todos os membros começam com zero avisos.
+                        Ao deixar de pontuar em alguma ronda semanal, você recebe um aviso e a linha do seu nickname
+                        ficará amarela.
+                        Caso deixe de pontuar novamente em outra ronda, receberá um segundo aviso, a linha ficará
+                        laranja e será aplicada uma multa de $600.
+                        Se deixar de pontuar pela terceira vez, a coluna de banimento será preenchida e você será banido
+                        permanentemente da equipe.
+                    </p>
+                </div>
+
+            </div>
+        </section>
     </main>
 
     <custom-footer></custom-footer>
@@ -296,241 +307,242 @@
     <script src="script.js"></script>
 
     <script>
-async function atualizarTudo() {
-    const url = "https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec";
+        async function atualizarTudo() {
+            const url = "https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec";
 
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
 
-        // 🔹 Topo do site
-        document.getElementById('members').textContent = data.members ?? 0;
-        document.getElementById('donations').textContent = `$${data.donations ?? 0}`;
-        document.getElementById('bosses').textContent = data.bosses ?? 0;
+                // 🔹 Topo do site
+                document.getElementById('members').textContent = data.members ?? 0;
+                document.getElementById('donations').textContent = `$${data.donations ?? 0}`;
+                document.getElementById('bosses').textContent = data.bosses ?? 0;
 
-        // 🔹 Barra da semana
-        const weekly = data.bossesSemana ?? 0;
-        const maxWeekly = 30;
-        const percentage = Math.min(weekly / maxWeekly * 100, 100);
-        const bar = document.getElementById('weeklyBar');
-        const text = document.getElementById('weeklyText');
-        bar.style.width = percentage + "%";
-        text.textContent = `${weekly}/${maxWeekly} bosses`;
+                // 🔹 Barra da semana
+                const weekly = data.bossesSemana ?? 0;
+                const maxWeekly = 30;
+                const percentage = Math.min(weekly / maxWeekly * 100, 100);
+                const bar = document.getElementById('weeklyBar');
+                const text = document.getElementById('weeklyText');
+                bar.style.width = percentage + "%";
+                text.textContent = `${weekly}/${maxWeekly} bosses`;
 
-        // cores dinâmicas
-        if (percentage < 25) {
-            bar.style.backgroundColor = "#ff0000";
-            bar.style.boxShadow = "0 0 4px #ff0000,0 0 8px #ff0000,0 0 16px #ff0000,0 0 32px #ff0000,0 0 64px #ff0000";
-        } else if (percentage < 50) {
-            bar.style.backgroundColor = "#ff7f00";
-            bar.style.boxShadow = "0 0 4px #ff7f00,0 0 8px #ff7f00,0 0 16px #ff7f00,0 0 32px #ff7f00,0 0 64px #ff7f00";
-        } else if (percentage < 75) {
-            bar.style.backgroundColor = "#edff00";
-            bar.style.boxShadow = "0 0 4px #edff00,0 0 8px #edff00,0 0 16px #edff00,0 0 32px #edff00,0 0 64px #edff00";
-        } else {
-            bar.style.backgroundColor = "#00d105";
-            bar.style.boxShadow = "0 0 4px #00d105,0 0 8px #00d105,0 0 16px #00d105,0 0 32px #00d105,0 0 64px #00d105";
-        }
+                // cores dinâmicas
+                if (percentage < 25) {
+                    bar.style.backgroundColor = "#ff0000";
+                    bar.style.boxShadow = "0 0 4px #ff0000,0 0 8px #ff0000,0 0 16px #ff0000,0 0 32px #ff0000,0 0 64px #ff0000";
+                } else if (percentage < 50) {
+                    bar.style.backgroundColor = "#ff7f00";
+                    bar.style.boxShadow = "0 0 4px #ff7f00,0 0 8px #ff7f00,0 0 16px #ff7f00,0 0 32px #ff7f00,0 0 64px #ff7f00";
+                } else if (percentage < 75) {
+                    bar.style.backgroundColor = "#edff00";
+                    bar.style.boxShadow = "0 0 4px #edff00,0 0 8px #edff00,0 0 16px #edff00,0 0 32px #edff00,0 0 64px #edff00";
+                } else {
+                    bar.style.backgroundColor = "#00d105";
+                    bar.style.boxShadow = "0 0 4px #00d105,0 0 8px #00d105,0 0 16px #00d105,0 0 32px #00d105,0 0 64px #00d105";
+                }
 
-        // 🔹 Painel de controle
-        const bossContainer = document.getElementById("bossCards");
-        Object.keys(data.bossesPainel ?? {}).forEach(key => {
-            let el = document.getElementById(`${key}-value`);
-            if (el) {
-                el.textContent = data.bossesPainel[key];
-            } else {
-                // se não existir ainda, cria card
-                const card = document.createElement("div");
-                card.className = "bg-card p-6 rounded-lg border border-gray-800 text-center";
-                card.innerHTML = `
+                // 🔹 Painel de controle
+                const bossContainer = document.getElementById("bossCards");
+                Object.keys(data.bossesPainel ?? {}).forEach(key => {
+                    let el = document.getElementById(`${key}-value`);
+                    if (el) {
+                        el.textContent = data.bossesPainel[key];
+                    } else {
+                        // se não existir ainda, cria card
+                        const card = document.createElement("div");
+                        card.className = "bg-card p-6 rounded-lg border border-gray-800 text-center";
+                        card.innerHTML = `
                     <p class="text-4xl font-bold mb-2" id="${key}-value">${data.bossesPainel[key]}</p>
-                    <p class="text-gray-400 mb-4">${key.replace('boss','Boss ')}</p>
+                    <p class="text-gray-400 mb-4">${key.replace('boss', 'Boss ')}</p>
                     <div class="flex justify-between items-center">
                         <button class="minus bg-gray-700 px-4 py-2 rounded">−</button>
                         <button class="plus bg-gray-700 px-4 py-2 rounded">+</button>
                     </div>
                 `;
-                bossContainer.appendChild(card);
+                        bossContainer.appendChild(card);
 
-                // adiciona funcionalidade + e -
-                const number = card.querySelector(`#${key}-value`);
-                const minus = card.querySelector(".minus");
-                const plus = card.querySelector(".plus");
-                let cooldown = false;
-                function update(delta) {
-                    if (cooldown) return;
-                    let val = parseInt(number.textContent) || 0;
-                    val = Math.max(0, val + delta);
-                    number.textContent = val;
-                    cooldown = true;
-                    setTimeout(() => cooldown = false, 1000);
-                    // 🔜 futuramente envia para Apps Script
-                }
-                minus.onclick = () => update(-1);
-                plus.onclick = () => update(1);
+                        // adiciona funcionalidade + e -
+                        const number = card.querySelector(`#${key}-value`);
+                        const minus = card.querySelector(".minus");
+                        const plus = card.querySelector(".plus");
+                        let cooldown = false;
+                        function update(delta) {
+                            if (cooldown) return;
+                            let val = parseInt(number.textContent) || 0;
+                            val = Math.max(0, val + delta);
+                            number.textContent = val;
+                            cooldown = true;
+                            setTimeout(() => cooldown = false, 1000);
+                            // 🔜 futuramente envia para Apps Script
+                        }
+                        minus.onclick = () => update(-1);
+                        plus.onclick = () => update(1);
+                    }
+                });
+
+            } catch (err) {
+                console.error("Erro ao atualizar tudo:", err);
             }
-        });
-
-    } catch (err) {
-        console.error("Erro ao atualizar tudo:", err);
-    }
-}
-
-// chama ao carregar a página
-atualizarTudo();
-    </script>
-<script>
-async function updateWeeklyBar() {
-    try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec");
-        const data = await response.json();
-
-        const weekly = data.bossesSemana || 0; // bosses da semana
-        const maxWeekly = 30;
-        const percentage = Math.min(weekly / maxWeekly * 100, 100);
-
-        const bar = document.getElementById('weeklyBar');
-        const text = document.getElementById('weeklyText');
-
-        // largura da barra
-        bar.style.width = percentage + "%";
-
-        // cor dinâmica com neon
-        if (percentage < 25) {
-            bar.style.backgroundColor = "#ff0000";
-            bar.style.boxShadow = "0 0 4px #ff0000,0 0 8px #ff0000,0 0 16px #ff0000,0 0 32px #ff0000,0 0 64px #ff0000";
-        } else if (percentage < 50) {
-            bar.style.backgroundColor = "#ff7f00";
-            bar.style.boxShadow = "0 0 4px #ff7f00,0 0 8px #ff7f00,0 0 16px #ff7f00,0 0 32px #ff7f00,0 0 64px #ff7f00";
-        } else if (percentage < 75) {
-            bar.style.backgroundColor = "#edff00";
-            bar.style.boxShadow = "0 0 4px #edff00,0 0 8px #edff00,0 0 16px #edff00,0 0 32px #edff00,0 0 64px #edff00";
-        } else {
-            bar.style.backgroundColor = "#00d105";
-            bar.style.boxShadow = "0 0 4px #00d105,0 0 8px #00d105,0 0 16px #00d105,0 0 32px #00d105,0 0 64px #00d105";
         }
 
-        text.textContent = `${weekly}/${maxWeekly} bosses`;
-    } catch(err) {
-        console.error("Erro ao atualizar barra semanal:", err);
-    }
-}
+        // chama ao carregar a página
+        atualizarTudo();
+    </script>
+    <script>
+        async function updateWeeklyBar() {
+            try {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec");
+                const data = await response.json();
 
-// chama ao carregar a página
-updateWeeklyBar();
-</script>
-</div>
-</div>
-  </div>
-</div>
+                const weekly = data.bossesSemana || 0; // bosses da semana
+                const maxWeekly = 30;
+                const percentage = Math.min(weekly / maxWeekly * 100, 100);
+
+                const bar = document.getElementById('weeklyBar');
+                const text = document.getElementById('weeklyText');
+
+                // largura da barra
+                bar.style.width = percentage + "%";
+
+                // cor dinâmica com neon
+                if (percentage < 25) {
+                    bar.style.backgroundColor = "#ff0000";
+                    bar.style.boxShadow = "0 0 4px #ff0000,0 0 8px #ff0000,0 0 16px #ff0000,0 0 32px #ff0000,0 0 64px #ff0000";
+                } else if (percentage < 50) {
+                    bar.style.backgroundColor = "#ff7f00";
+                    bar.style.boxShadow = "0 0 4px #ff7f00,0 0 8px #ff7f00,0 0 16px #ff7f00,0 0 32px #ff7f00,0 0 64px #ff7f00";
+                } else if (percentage < 75) {
+                    bar.style.backgroundColor = "#edff00";
+                    bar.style.boxShadow = "0 0 4px #edff00,0 0 8px #edff00,0 0 16px #edff00,0 0 32px #edff00,0 0 64px #edff00";
+                } else {
+                    bar.style.backgroundColor = "#00d105";
+                    bar.style.boxShadow = "0 0 4px #00d105,0 0 8px #00d105,0 0 16px #00d105,0 0 32px #00d105,0 0 64px #00d105";
+                }
+
+                text.textContent = `${weekly}/${maxWeekly} bosses`;
+            } catch (err) {
+                console.error("Erro ao atualizar barra semanal:", err);
+            }
+        }
+
+        // chama ao carregar a página
+        updateWeeklyBar();
+    </script>
+    </div>
+    </div>
+    </div>
+    </div>
 
 
 
-<script>
-/* ⚙️ Scroll show/hide */
-let lastScroll = 0;
-const gearBtn = document.getElementById("gearBtn");
+    <script>
+        /* ⚙️ Scroll show/hide */
+        let lastScroll = 0;
+        const gearBtn = document.getElementById("gearBtn");
 
-gearBtn.onclick = () => {
-    window.open("https://script.google.com/macros/s/AKfycbyBg02vrOgKuGh3aIs-9IWQVRN4_u0erU77Nu5l6XSalMyWus6RfJXu3FoqWJT75j0j/exec", "_blank");
-};
+        gearBtn.onclick = () => {
+            window.open("https://script.google.com/macros/s/AKfycbyBg02vrOgKuGh3aIs-9IWQVRN4_u0erU77Nu5l6XSalMyWus6RfJXu3FoqWJT75j0j/exec", "_blank");
+        };
 
-window.addEventListener("scroll", () => {
-  const current = window.scrollY;
-  if (current > lastScroll) {
-    gearBtn.style.opacity = "0";
-    gearBtn.style.pointerEvents = "none";
-  } else {
-    gearBtn.style.opacity = "1";
-    gearBtn.style.pointerEvents = "auto";
-  }
-  lastScroll = current;
-});
-</script>
+        window.addEventListener("scroll", () => {
+            const current = window.scrollY;
+            if (current > lastScroll) {
+                gearBtn.style.opacity = "0";
+                gearBtn.style.pointerEvents = "none";
+            } else {
+                gearBtn.style.opacity = "1";
+                gearBtn.style.pointerEvents = "auto";
+            }
+            lastScroll = current;
+        });
+    </script>
 
 
-<script>
-  // Inicializa todos os ícones Feather
-  feather.replace();
-</script>
+    <script>
+        // Inicializa todos os ícones Feather
+        feather.replace();
+    </script>
 
-<script>
-function getBrasiliaNow() {
-  const now = new Date();
-  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-  return new Date(utc - (3 * 60 * 60 * 1000)); // GMT-3
-}
+    <script>
+        function getBrasiliaNow() {
+            const now = new Date();
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            return new Date(utc - (3 * 60 * 60 * 1000)); // GMT-3
+        }
 
-function nextDate(dayOffset, hour) {
-  const d = getBrasiliaNow();
-  d.setDate(d.getDate() + dayOffset);
-  d.setHours(hour, 0, 0, 0);
-  return d;
-}
+        function nextDate(dayOffset, hour) {
+            const d = getBrasiliaNow();
+            d.setDate(d.getDate() + dayOffset);
+            d.setHours(hour, 0, 0, 0);
+            return d;
+        }
 
-function updateTimer() {
-  const now = getBrasiliaNow();
-  const day = now.getDay(); // 0 = domingo
+        function updateTimer() {
+            const now = getBrasiliaNow();
+            const day = now.getDay(); // 0 = domingo
 
-  let target, title = "", subtitle = "", round = "—";
+            let target, title = "", subtitle = "", round = "—";
 
-  // 🔹 Domingo → Segunda 12h
-  if (day === 0 || (day === 1 && now.getHours() < 12)) {
-    target = nextDate(day === 0 ? 1 : 0, 12);
-    title = "Para o início das rondas";
-    subtitle = "";
-    round = "Aguardando";
-  }
+            // 🔹 Domingo → Segunda 12h
+            if (day === 0 || (day === 1 && now.getHours() < 12)) {
+                target = nextDate(day === 0 ? 1 : 0, 12);
+                title = "Para o início das rondas";
+                subtitle = "";
+                round = "Aguardando";
+            }
 
-  // 🔹 Segunda 12h → Terça 18h (Ronda 1)
-  else if (
-    (day === 1 && now.getHours() >= 12) ||
-    (day === 2 && now.getHours() < 18)
-  ) {
-    target = day === 1 ? nextDate(1, 18) : nextDate(0, 18);
-    title = "Para o fim da primeira ronda";
-    round = "1";
-  }
+            // 🔹 Segunda 12h → Terça 18h (Ronda 1)
+            else if (
+                (day === 1 && now.getHours() >= 12) ||
+                (day === 2 && now.getHours() < 18)
+            ) {
+                target = day === 1 ? nextDate(1, 18) : nextDate(0, 18);
+                title = "Para o fim da primeira ronda";
+                round = "1";
+            }
 
-  // 🔹 Terça 18h → Quinta 18h (Ronda 2)
-  else if (
-    (day === 2 && now.getHours() >= 18) ||
-    day === 3 ||
-    (day === 4 && now.getHours() < 18)
-  ) {
-    target = nextDate(day === 4 ? 0 : (4 - day), 18);
-    title = "Para o fim da segunda ronda";
-    round = "2";
-  }
+            // 🔹 Terça 18h → Quinta 18h (Ronda 2)
+            else if (
+                (day === 2 && now.getHours() >= 18) ||
+                day === 3 ||
+                (day === 4 && now.getHours() < 18)
+            ) {
+                target = nextDate(day === 4 ? 0 : (4 - day), 18);
+                title = "Para o fim da segunda ronda";
+                round = "2";
+            }
 
-  // 🔹 Quinta 18h → Sábado 18h (Ronda 3)
-  else {
-    target = nextDate(day === 6 ? 0 : (6 - day), 18);
-    title = "Para o fim da terceira ronda";
-    round = "3";
-  }
+            // 🔹 Quinta 18h → Sábado 18h (Ronda 3)
+            else {
+                target = nextDate(day === 6 ? 0 : (6 - day), 18);
+                title = "Para o fim da terceira ronda";
+                round = "3";
+            }
 
-  const diff = target - now;
+            const diff = target - now;
 
-  const totalSeconds = Math.max(0, Math.floor(diff / 1000));
-  const days = Math.floor(totalSeconds / 86400);
-  const hours = Math.floor((totalSeconds % 86400) / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
+            const totalSeconds = Math.max(0, Math.floor(diff / 1000));
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor((totalSeconds % 86400) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
 
-  document.getElementById("timerTitle").textContent = title;
-  document.getElementById("timerSubtitle").textContent = subtitle;
+            document.getElementById("timerTitle").textContent = title;
+            document.getElementById("timerSubtitle").textContent = subtitle;
 
-  document.getElementById("days").textContent = String(days).padStart(2, "0");
-  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+            document.getElementById("days").textContent = String(days).padStart(2, "0");
+            document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+            document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+            document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
 
-  document.getElementById("roundValue").textContent = round;
-}
+            document.getElementById("roundValue").textContent = round;
+        }
 
-updateTimer();
-setInterval(updateTimer, 1000);
-</script>
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    </script>
 </body>
+
 </html>
