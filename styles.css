@@ -1,0 +1,10 @@
+/* Neon Effect */
+.neon {
+    color: #eaffea;
+    text-shadow:
+        0 0 4px #bfbfbf,
+        0 0 8px #bfbfbf,
+        0 0 16px #bfbfbf,
+        0 0 32px #bfbfbf,
+        0 0 64px #bfbfbf;
+}
