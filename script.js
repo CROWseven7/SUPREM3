@@ -1,7 +1,7 @@
-// 🔹 Feather Icons
+// Feather Icons
 feather.replace();
 
-// 🔹 Funções para horário de Brasília
+// Funções para horário de Brasília
 function getBrasiliaNow() {
     const now = new Date();
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
@@ -15,7 +15,7 @@ function nextDate(dayOffset, hour) {
     return d;
 }
 
-// 🔹 Timer
+// Timer
 function updateTimer() {
     const now = getBrasiliaNow();
     const day = now.getDay(); // 0 = domingo
@@ -59,7 +59,7 @@ function updateTimer() {
 updateTimer();
 setInterval(updateTimer, 1000);
 
-// 🔹 Fetch dados da planilha
+// Fetch dados da planilha
 async function carregarDados() {
     const url = "https://script.google.com/macros/s/AKfycbwWNJ4nEbRJgnDuYJBe-4U49n2XPbl6QEYuIRvyW7wM-Lpg0Id4m8Qpd3IhSLHzLo32/exec";
 
@@ -118,7 +118,7 @@ async function carregarDados() {
 
 document.addEventListener("DOMContentLoaded", carregarDados);
 
-// 🔹 Scroll show/hide do botão
+// Scroll show/hide do botão
 let lastScroll = 0;
 const gearBtn = document.getElementById("gearBtn");
 
@@ -137,3 +137,4 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
