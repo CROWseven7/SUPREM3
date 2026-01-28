@@ -1,21 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const overlay = document.getElementById("maintenanceOverlay");
-
-    // Ativa o modo manutenção
-    document.body.classList.add("maintenance-mode");
-
-    // Impede clique em qualquer lugar do overlay de passar para trás
-    overlay.addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
-
-    // Impede que eventos de teclado façam algo no site
-    window.addEventListener("keydown", (e) => {
-        e.preventDefault();
-    }, true);
-});
-
-
 // Feather Icons
 feather.replace();
 
@@ -155,6 +137,7 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
 
 
 
