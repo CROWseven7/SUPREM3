@@ -61,7 +61,7 @@ setInterval(updateTimer, 1000);
 
 // Fetch dados da planilha
 async function carregarDados() {
-    const url = "https://script.google.com/macros/s/AKfycbwcMEM38XsTfhmwBYYzX2nfgovM95tt82VrOPxt_UT8V6sgG9aHdIvu6Xw22Rw9ZCVL/exec";
+    const url = "https://script.google.com/macros/s/AKfycbwcMEM38XsTfhmwBYYzX2nfgovM95tt82VrOPxt_UT8V6sgG9aHdIvu6Xw22Rw9ZCVL/execjson=true";
 
     const bar = document.getElementById('weeklyBar');
     const text = document.getElementById('weeklyText');
@@ -137,6 +137,7 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
 
 
 
