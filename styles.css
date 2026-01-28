@@ -22,13 +22,3 @@
 .neon {
     animation: neonPulse 3s ease-in-out infinite;
 }
-
-/* Bloqueia scroll e seleção */
-body.maintenance-mode {
-    overflow: hidden;       /* bloqueia scroll */
-    touch-action: none;     /* bloqueia gestos em mobile */
-    user-select: none;      /* não permite selecionar texto */
-}
-#maintenanceOverlay {
-    pointer-events: all;    /* garante que o overlay capture todos os cliques */
-}
