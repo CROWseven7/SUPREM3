@@ -123,7 +123,7 @@ let lastScroll = 0;
 const gearBtn = document.getElementById("gearBtn");
 
 gearBtn.onclick = () => {
-    window.open("https://script.google.com/macros/s/AKfycbwcMEM38XsTfhmwBYYzX2nfgovM95tt82VrOPxt_UT8V6sgG9aHdIvu6Xw22Rw9ZCVL/exec", "_blank");
+    //window.open("https://script.google.com/macros/s/AKfycbwcMEM38XsTfhmwBYYzX2nfgovM95tt82VrOPxt_UT8V6sgG9aHdIvu6Xw22Rw9ZCVL/exec", "_blank");
 };
 
 window.addEventListener("scroll", () => {
@@ -137,6 +137,7 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
 
 
 
