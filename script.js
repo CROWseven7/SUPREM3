@@ -72,7 +72,8 @@ async function carregarDados() {
         const response = await fetch(url);
         const data = await response.json();
 
-        document.getElementById('members').textContent = data.members ?? 0;
+        const membersFromJson = Number(data.members) || 0;
+        document.getElementById('members').textContent = membersFromJson + 5;
         document.getElementById('donations').textContent = `$${data.donations ?? 0}`;
         document.getElementById('bosses').textContent = data.bosses ?? 0;
 
@@ -137,6 +138,7 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
 
 
 
