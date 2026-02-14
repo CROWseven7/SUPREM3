@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUPREM3 x V Marcas Portugal</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ffffff',
+                        secondary: '#1a1a1a',
+                        asphalt: '#0f0f0f',
+                        card: '#1a1a1a',
+                        green: '#00d105',
+                        ambar: '#FFD700'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-asphalt text-gray-200 min-h-screen flex items-center justify-center font-sans">
+
+    <main class="w-full max-w-4xl px-6">
+
+        <!-- Título -->
+        <section class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-[0_0_10px_#ffffff]">
+                SUPREM3 x V Marcas Portugal
+            </h1>
+            <p class="text-gray-400 mt-4 text-lg">
+                Selecione sua equipe para continuar
+            </p>
+        </section>
+
+        <!-- Seleção de Equipe -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- SUPREM3 -->
+            <div onclick="goToTeam('../SUPREM3/suprem3.html')"
+                class="bg-card border border-gray-800 p-10 rounded-xl text-center cursor-pointer 
+                       hover:-translate-y-2 hover:shadow-2xl transition duration-300">
+
+                <h2 class="text-3xl font-bold text-white mb-4">SUPREM3</h2>
+                <p class="text-gray-400">Acessar equipe</p>
+
+                <div class="mt-6">
+                    <button
+                        class="bg-gray-200 hover:bg-red text-black px-6 py-2 rounded-lg font-semibold transition">
+                        Entrar
+                    </button>
+                </div>
+            </div>
+
+            <!-- V Marcas Portugal -->
+            <div onclick="goToTeam('../V Marcas Portugal/vMarcasPortugal.html')"
+                class="bg-card border border-gray-800 p-10 rounded-xl text-center cursor-pointer 
+                       hover:-translate-y-2 hover:shadow-2xl transition duration-300">
+
+                <h2 class="text-3xl font-bold text-white mb-4">V Marcas Portugal</h2>
+                <p class="text-gray-400">Acessar equipe</p>
+
+                <div class="mt-6">
+                    <button
+                        class="bg-gray-200 hover:brightness-110 text-black px-6 py-2 rounded-lg font-semibold transition">
+                        Entrar
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        function goToTeam(page) {
+            window.location.href = page;
+        }
+    </script>
+
+</body>
+</html>
