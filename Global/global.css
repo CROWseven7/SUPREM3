@@ -1,0 +1,24 @@
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 4px #bfbfbf,
+      0 0 8px #bfbfbf,
+      0 0 16px #bfbfbf,
+      0 0 32px #bfbfbf,
+      0 0 64px #bfbfbf;
+           }
+
+  50% {
+    text-shadow:
+      0 0 6px #bfbfbf,
+      0 0 12px #bfbfbf,
+      0 0 20px #bfbfbf,
+      0 0 32px #bfbfbf,
+      0 0 48px #bfbfbf;
+      }
+
+}
+
+.neon {
+    animation: neonPulse 3s ease-in-out infinite;
+}
