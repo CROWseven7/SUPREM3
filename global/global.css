@@ -67,3 +67,19 @@
     /* Evita que a linha 'vaze' visualmente se estiver em 0% ou 100% */
     max-width: 100%; 
 }
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* O "segredo" para matar a rolagem lateral */
+    position: relative;
+}
+
+.wind-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden; /* Garante que as linhas de vento sumam ao sair da tela */
+    width: 100vw;
+    height: 100vh;
+}
