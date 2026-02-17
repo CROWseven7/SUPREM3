@@ -68,11 +68,15 @@
 }
 
 html {
-    overflow-y: scroll; /* Força a barra vertical principal */
-    overflow-x: hidden; /* Mata qualquer tentativa de barra horizontal */
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    overflow-y: scroll; /* Mantém a funcionalidade */
+    overflow-x: hidden;
+    -ms-overflow-style: none;  /* Esconde no Internet Explorer e Edge antigo */
+    scrollbar-width: none;  /* Esconde no Firefox */
+}
+
+/* Esconde no Chrome, Safari e Opera */
+html::-webkit-scrollbar {
+    display: none;
 }
 
 body {
@@ -81,9 +85,8 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    overflow-y: visible; /* O body se expande, o html faz o scroll */
+    overflow-y: visible;
     position: relative;
-    -webkit-font-smoothing: antialiased;
 }
 
 .wind-container {
@@ -96,6 +99,7 @@ body {
     pointer-events: none;
     overflow: hidden;
 }
+
 
 
 
