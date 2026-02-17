@@ -63,7 +63,6 @@ setInterval(updateTimer, 1000);
 async function carregarDadosFirestore() {
     // 1. Configurações do seu Firebase
     const projectId = "supreme-group-829cf";
-    // URL direta para o documento "supreme 1" na coleção "equipes"
     const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/equipes/supreme%201`;
 
     const bar = document.getElementById('weeklyBar');
@@ -76,9 +75,6 @@ async function carregarDadosFirestore() {
         if (!response.ok) throw new Error("Erro ao acessar Firestore");
         
         const rawData = await response.json();
-        
-        // 2. Extração dos campos (Mapeando do formato Firestore para variáveis simples)
-        // O Firestore retorna os dados dentro de 'fields'
         const fields = rawData.fields;
         
         const members = Number(fields.membros?.integerValue || 0);
@@ -86,49 +82,48 @@ async function carregarDadosFirestore() {
         const bossesTotal = Number(fields.bosses2026?.integerValue || 0);
         const weekly = Number(fields.bossesSemana?.integerValue || 0);
 
-        // 3. Atualização do DOM (Mantendo sua lógica original)
+        // 2. Atualização dos contadores
         document.getElementById('members').textContent = members + 1;
         document.getElementById('donations').textContent = `$${donations}`;
         document.getElementById('bosses').textContent = bossesTotal;
 
-        // Configurações da barra
+        // 3. Configurações da barra e meta
         const maxWeekly = 40;
         const goalWeekly = 30;
-        const goalOffsetPx = 16;
-
         const percentage = Math.min((weekly / maxWeekly) * 100, 100);
         const goalPercentage = (goalWeekly / maxWeekly) * 100;
 
-        // Animação da meta
-        goalLine.style.left = `calc(${goalPercentage}% - ${goalOffsetPx}px)`;
-        goalLine.style.transition = "opacity 1s ease-in-out";
+        // 4. Animação da Linha da Meta (Goal Line)
+        // Usamos translateX(-50%) para centralizar a linha exatamente no ponto da meta
+        goalLine.style.left = `${goalPercentage}%`;
+        goalLine.style.transform = "translateX(-50%)"; 
         goalLine.style.boxShadow = "0 0 8px #ffdd00, 0 0 16px #ffdd00, 0 0 32px #ffdd00";
         setTimeout(() => { goalLine.style.opacity = "1"; }, 100);
 
-        // Barra de progresso
-        bar.style.opacity = "1";
-        bar.style.width = "100%"; // O container fica sempre em 100%
-        bar.style.transformOrigin = "left"; // A escala começa da esquerda
-        bar.style.transform = `scaleX(${percentage / 100})`; // A placa de vídeo faz o trabalho
-        bar.style.transition = "transform 1s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s";
-        bar.style.opacity = "1";
+        // 5. Animação da Barra de Progresso (ScaleX)
+        // Resetamos o estado inicial para garantir que a animação ocorra
+        bar.style.transformOrigin = "left";
+        bar.style.width = "100%"; // Ocupa o container, mas o scaleX controla o visual
+        
+        // O requestAnimationFrame força o navegador a processar o scaleX(0) antes de animar
+        requestAnimationFrame(() => {
+            bar.style.transition = "transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.5s";
+            bar.style.transform = `scaleX(${percentage / 100})`;
+            bar.style.opacity = "1";
+        });
 
-        // Lógica de cores baseada no progresso da meta
+        // 6. Lógica de cores baseada no progresso
         const progressForColor = (weekly / goalWeekly) * 100;
-        if (progressForColor < 25) {
-            bar.style.backgroundColor = "#ff0000";
-            bar.style.boxShadow = "0 0 8px #ff0000, 0 0 16px #ff0000, 0 0 32px #ff0000";
-        } else if (progressForColor < 50) {
-            bar.style.backgroundColor = "#ff7f00";
-            bar.style.boxShadow = "0 0 8px #ff7f00, 0 0 16px #ff7f00, 0 0 32px #ff7f00";
-        } else if (progressForColor < 75) {
-            bar.style.backgroundColor = "#edff00";
-            bar.style.boxShadow = "0 0 8px #edff00, 0 0 16px #edff00, 0 0 32px #edff00";
-        } else {
-            bar.style.backgroundColor = "#00d105";
-            bar.style.boxShadow = "0 0 8px #00d105, 0 0 16px #00d105, 0 0 32px #00d105";
-        }
+        let color = "";
+        if (progressForColor < 25) color = "#ff0000";
+        else if (progressForColor < 50) color = "#ff7f00";
+        else if (progressForColor < 75) color = "#edff00";
+        else color = "#00d105";
 
+        bar.style.backgroundColor = color;
+        bar.style.boxShadow = `0 0 8px ${color}, 0 0 16px ${color}`;
+
+        // 7. Atualização de textos
         text.textContent = `${weekly}/${maxWeekly} Bosses concluídos`;
         goalText.textContent = `Meta ${goalWeekly}/${maxWeekly}`;
 
@@ -167,6 +162,7 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
 
 
 
