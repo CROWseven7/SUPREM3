@@ -42,14 +42,9 @@
     border-radius: 0.75rem;
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    
-    /* ⚠️ Remova ou comente o blur se o LCP continuar baixo no mobile */
-    /* backdrop-filter: blur(6px); */
-    
-    /* Melhora a suavidade das transições */
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
-    /* Indica ao navegador o que vai mudar no hover */
     will-change: transform;
+    overflow: hidden;
 }
 
 #weeklyBar {
@@ -58,3 +53,4 @@
     transform-origin: left; /* Garante que ela cresça da esquerda para a direita */
     will-change: transform;
 }
+
