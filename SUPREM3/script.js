@@ -61,7 +61,6 @@ setInterval(updateTimer, 1000);
 
 // Fetch dados da planilha
 async function carregarDadosFirestore() {
-    // 1. Configurações do seu Firebase
     const projectId = "supreme-group-829cf";
     const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/equipes/supreme%201`;
 
@@ -69,81 +68,109 @@ async function carregarDadosFirestore() {
     const text = document.getElementById('weeklyText');
     const goalText = document.getElementById('goalText');
     const goalLine = document.getElementById('goalLine');
+    const modal = document.getElementById('historyModal');
+    const modalContent = document.getElementById('modalContent');
 
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error("Erro ao acessar Firestore");
-        
+
         const rawData = await response.json();
         const fields = rawData.fields;
-        
+
+        // 1. Extração de dados
         const members = Number(fields.membros?.integerValue || 0);
         const donations = Number(fields.doacao?.integerValue || 0);
-        const bossesTotal = Number(fields.bosses2026?.integerValue || 0);
+        const bossesTotalGeral = Number(fields.bossesConcluidos?.integerValue || 0);
         const weekly = Number(fields.bossesSemana?.integerValue || 0);
 
-        // 2. Atualização dos contadores
+        // 2. Atualização dos cards
         document.getElementById('members').textContent = members + 1;
         document.getElementById('donations').textContent = `$${donations}`;
-        document.getElementById('bosses').textContent = bossesTotal;
+        document.getElementById('bosses').textContent = bossesTotalGeral.toLocaleString();
 
-        // 3. Configurações da barra e meta
+        // 3. Montagem do Histórico
+        let historico = [];
+        for (const key in fields) {
+            if (key.startsWith('bosses') && key !== 'bossesSemana' && key !== 'bossesConcluidos') {
+                const valor = Number(fields[key].integerValue || 0);
+                const ano = key.replace('bosses', '');
+                historico.push({ ano, valor });
+            }
+        }
+        historico.sort((a, b) => b.ano - a.ano);
+
+        modalContent.innerHTML = historico.map(item => `
+<div class="flex justify-between items-center p-4 bg-[#0f0f0f] rounded-xl border border-gray-800 transition-all duration-300 hover:bg-[#141414] hover:border-gray-500 hover:scale-[1.02] group">
+        <div>
+            <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest group-hover:text-gray-300 transition-colors">Ano</p>
+            <p class="text-white font-bold">${item.ano}</p>
+        </div>
+        <div class="text-right">
+            <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest group-hover:text-gray-300 transition-colors">Bosses</p>
+            <p class="text-white font-black text-xl drop-shadow-[0_0_8px_rgba(237,255,0,0.2)]">${item.valor.toLocaleString()}</p>
+        </div>
+    </div>
+`).join('');
+
+        const toggleModal = (show) => {
+            if (show) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.classList.add('overflow-hidden'); // Trava o scroll da página
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.classList.remove('overflow-hidden');
+            }
+        };
+
+        document.getElementById('openModal').onclick = (e) => { e.preventDefault(); toggleModal(true); };
+        document.getElementById('closeModal').onclick = () => toggleModal(false);
+        document.getElementById('closeModalBtn').onclick = () => toggleModal(false);
+
+        // Fecha ao clicar no fundo escuro
+        modal.onclick = (e) => { if (e.target === modal) toggleModal(false); };
+
+        // 5. Barra Semanal
         const maxWeekly = 40;
         const goalWeekly = 30;
         const percentage = Math.min((weekly / maxWeekly) * 100, 100);
         const goalPercentage = (goalWeekly / maxWeekly) * 100;
 
-        // 4. Animação da Linha da Meta (Goal Line)
-        // Usamos translateX(-50%) para centralizar a linha exatamente no ponto da meta
         goalLine.style.left = `${goalPercentage}%`;
-        goalLine.style.transform = "translateX(-50%)"; 
-        goalLine.style.boxShadow = "0 0 8px #ffdd00, 0 0 16px #ffdd00, 0 0 32px #ffdd00";
-        setTimeout(() => { goalLine.style.opacity = "1"; }, 100);
+        goalLine.style.transform = "translateX(-50%)";
+        goalLine.style.opacity = "1";
 
-        // 5. Animação da Barra de Progresso (ScaleX)
-        // Resetamos o estado inicial para garantir que a animação ocorra
         bar.style.transformOrigin = "left";
-        bar.style.width = "100%"; // Ocupa o container, mas o scaleX controla o visual
-        
-        // O requestAnimationFrame força o navegador a processar o scaleX(0) antes de animar
+        bar.style.width = "100%";
         requestAnimationFrame(() => {
-            bar.style.transition = "transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.5s";
+            bar.style.transition = "transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1)";
             bar.style.transform = `scaleX(${percentage / 100})`;
             bar.style.opacity = "1";
         });
 
-        // 6. Lógica de cores baseada no progresso
         const progressForColor = (weekly / goalWeekly) * 100;
-        let color = "";
-        if (progressForColor < 25) color = "#ff0000";
-        else if (progressForColor < 50) color = "#ff7f00";
-        else if (progressForColor < 75) color = "#edff00";
-        else color = "#00d105";
+        const color = progressForColor < 50 ? "#ff7f00" : progressForColor < 75 ? "#edff00" : "#00d105";
+        bar.style.backgroundColor = color;
+        bar.style.boxShadow = `0 0 12px ${color}44`;
 
-        bar.style.background = `linear-gradient(90deg, ${color} 0%, #ffffffc8 200%)`;
-        bar.style.boxShadow = `0 0 8px ${color}, 0 0 16px ${color}`;
-
-        // 7. Atualização de textos
         text.textContent = `${weekly}/${maxWeekly} Bosses concluídos`;
         goalText.textContent = `Meta ${goalWeekly}/${maxWeekly}`;
 
+        feather.replace();
+
     } catch (err) {
-        console.error("Erro ao carregar dados do Firestore:", err);
+        console.error("Erro no Firestore:", err);
     }
 }
 
-// Inicia a busca IMEDIATAMENTE ao carregar o arquivo JS
 const promessaDados = carregarDadosFirestore();
 
-// O listener de DOMContentLoaded agora apenas garante que o HTML 
-// existe antes de aplicarmos os dados recebidos
 document.addEventListener("DOMContentLoaded", () => {
-    // Se a promessa já resolveu, os dados serão aplicados. 
-    // Se não, ela aguardará o fim do fetch.
-    promessaDados; 
+    promessaDados;
 });
 
-// Scroll show/hide do botão
 let lastScroll = 0;
 const gearBtn = document.getElementById("gearBtn");
 
