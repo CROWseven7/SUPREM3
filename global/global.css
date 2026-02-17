@@ -54,3 +54,16 @@
     will-change: transform;
 }
 
+/* 1. Garante que a barra e a meta não criem rolagem lateral */
+.card-ui {
+    overflow: hidden; 
+}
+
+/* 2. Garante que a linha da meta não seja considerada "largura" pelo navegador */
+#goalLine {
+    pointer-events: none;
+    z-index: 10;
+    will-change: opacity;
+    /* Evita que a linha 'vaze' visualmente se estiver em 0% ou 100% */
+    max-width: 100%; 
+}
