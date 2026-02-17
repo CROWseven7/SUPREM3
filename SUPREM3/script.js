@@ -133,7 +133,7 @@ async function carregarDadosFirestore() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", carregarDados);
+document.addEventListener("DOMContentLoaded", carregarDadosFirestone);
 
 // Scroll show/hide do botão
 let lastScroll = 0;
@@ -154,6 +154,7 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
 
 
 
