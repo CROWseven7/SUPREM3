@@ -60,8 +60,11 @@ updateTimer();
 setInterval(updateTimer, 1000);
 
 // Fetch dados da planilha
-async function carregarDados() {
-    const url = "https://script.google.com/macros/s/AKfycbwcMEM38XsTfhmwBYYzX2nfgovM95tt82VrOPxt_UT8V6sgG9aHdIvu6Xw22Rw9ZCVL/exec?json=true";
+async function carregarDadosFirestore() {
+    // 1. Configurações do seu Firebase
+    const projectId = "supreme-group-829cf";
+    // URL direta para o documento "supreme 1" na coleção "equipes"
+    const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/equipes/supreme%201`;
 
     const bar = document.getElementById('weeklyBar');
     const text = document.getElementById('weeklyText');
@@ -70,14 +73,25 @@ async function carregarDados() {
 
     try {
         const response = await fetch(url);
-        const data = await response.json();
+        if (!response.ok) throw new Error("Erro ao acessar Firestore");
+        
+        const rawData = await response.json();
+        
+        // 2. Extração dos campos (Mapeando do formato Firestore para variáveis simples)
+        // O Firestore retorna os dados dentro de 'fields'
+        const fields = rawData.fields;
+        
+        const members = Number(fields.membros?.integerValue || 0);
+        const donations = Number(fields.doacao?.integerValue || 0);
+        const bossesTotal = Number(fields.bosses2026?.integerValue || 0);
+        const weekly = Number(fields.bossesSemana?.integerValue || 0);
 
-        const membersFromJson = Number(data.members) || 0;
-        document.getElementById('members').textContent = membersFromJson + 1;
-        document.getElementById('donations').textContent = `$${data.donations ?? 0}`;
-        document.getElementById('bosses').textContent = data.bosses ?? 0;
+        // 3. Atualização do DOM (Mantendo sua lógica original)
+        document.getElementById('members').textContent = members + 1;
+        document.getElementById('donations').textContent = `$${donations}`;
+        document.getElementById('bosses').textContent = bossesTotal;
 
-        const weekly = data.bossesSemana ?? 0;
+        // Configurações da barra
         const maxWeekly = 40;
         const goalWeekly = 30;
         const goalOffsetPx = 16;
@@ -85,16 +99,17 @@ async function carregarDados() {
         const percentage = Math.min((weekly / maxWeekly) * 100, 100);
         const goalPercentage = (goalWeekly / maxWeekly) * 100;
 
-        const barWidth = bar.offsetWidth;
-        const offset = goalOffsetPx;
-        goalLine.style.left = `calc(${goalPercentage}% - ${offset}px)`;
+        // Animação da meta
+        goalLine.style.left = `calc(${goalPercentage}% - ${goalOffsetPx}px)`;
         goalLine.style.transition = "opacity 1s ease-in-out";
         goalLine.style.boxShadow = "0 0 8px #ffdd00, 0 0 16px #ffdd00, 0 0 32px #ffdd00";
         setTimeout(() => { goalLine.style.opacity = "1"; }, 100);
 
+        // Barra de progresso
         bar.style.opacity = "1";
         bar.style.width = percentage + "%";
 
+        // Lógica de cores baseada no progresso da meta
         const progressForColor = (weekly / goalWeekly) * 100;
         if (progressForColor < 25) {
             bar.style.backgroundColor = "#ff0000";
@@ -112,8 +127,9 @@ async function carregarDados() {
 
         text.textContent = `${weekly}/${maxWeekly} Bosses concluídos`;
         goalText.textContent = `Meta ${goalWeekly}/${maxWeekly}`;
+
     } catch (err) {
-        console.error("Erro geral:", err);
+        console.error("Erro ao carregar dados do Firestore:", err);
     }
 }
 
@@ -138,6 +154,7 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
 
 
 
