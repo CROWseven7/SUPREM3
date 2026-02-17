@@ -52,7 +52,9 @@
     will-change: transform;
 }
 
-/* Otimização da Barra de Progresso que você usa no outro arquivo */
 #weeklyBar {
+    width: 100%; /* Ocupa o container todo */
+    transform: scaleX(0); /* Começa em ZERO (invisível/no canto esquerdo) */
+    transform-origin: left; /* Garante que ela cresça da esquerda para a direita */
     will-change: transform;
 }
