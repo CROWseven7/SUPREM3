@@ -36,14 +36,20 @@
 }
 
 .card-ui {
-    background-color: rgba(26, 26, 26, 0.95); /* Aumentamos a opacidade */
+    background-color: rgba(18, 18, 18, 0.25); 
+    border: 1px solid rgba(255, 255, 255, 0.05);
     padding: 1.5rem;
     border-radius: 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
     will-change: transform;
     overflow: hidden;
+}
+
+.card-ui:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 1), 0 0 15px rgba(255, 215, 0, 0.1);
 }
 
 #weeklyBar {
@@ -51,11 +57,6 @@
     transform: scaleX(0); /* Começa em ZERO (invisível/no canto esquerdo) */
     transform-origin: left; /* Garante que ela cresça da esquerda para a direita */
     will-change: transform;
-}
-
-/* 1. Garante que a barra e a meta não criem rolagem lateral */
-.card-ui {
-    overflow: hidden; 
 }
 
 /* 2. Garante que a linha da meta não seja considerada "largura" pelo navegador */
@@ -99,7 +100,12 @@ body {
     overflow: hidden;
 }
 
-
-
-
-
+/* Container que mantém o espaço ocupado */
+.sheet-wrapper {
+    width: 100%;
+    position: relative;
+    /* Proporção baseada nos seus valores: (506 / 1233) * 100 */
+    padding-bottom: 41%; 
+    height: 0;
+    overflow: hidden;
+}
