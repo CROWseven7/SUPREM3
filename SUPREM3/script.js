@@ -107,7 +107,11 @@ async function carregarDadosFirestore() {
 
         // Barra de progresso
         bar.style.opacity = "1";
-        bar.style.width = percentage + "%";
+        bar.style.width = "100%"; // O container fica sempre em 100%
+        bar.style.transformOrigin = "left"; // A escala começa da esquerda
+        bar.style.transform = `scaleX(${percentage / 100})`; // A placa de vídeo faz o trabalho
+        bar.style.transition = "transform 1s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s";
+        bar.style.opacity = "1";
 
         // Lógica de cores baseada no progresso da meta
         const progressForColor = (weekly / goalWeekly) * 100;
@@ -163,6 +167,7 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
 
 
 
