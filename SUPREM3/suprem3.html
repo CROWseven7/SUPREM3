@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/supremeIcon.png">
     <title>SUPREM3 Racing</title>
-    
+
     <link rel="preconnect" href="https://firestore.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
+
     <script src="script.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../global/global.js" defer></script>
@@ -39,11 +38,10 @@
 
 <body class="bg-asphalt text-gray-200 min-h-screen font-sans">
 
-    <button id="gearBtn" 
-        aria-label="Abrir Painel da equipe"
+    <!--<button id="gearBtn" aria-label="Abrir Painel da equipe"
         class="fixed top-4 left-4 z-50 bg-card border border-gray-800 p-3 rounded-full shadow-lg transition-all duration-300 hover:-translate-y-1">
         <i data-feather="settings"></i>
-    </button>
+    </button>-->
 
     <custom-header></custom-header>
 
@@ -187,12 +185,13 @@
                 </div>
 
                 <div class="p-1">
-                    <div class="overflow-hidden rounded-lg bg-[#121212] border border-gray-700">
-                        <iframe
-                            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1797724220&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false"
-                            class="w-full min-h-[400px] md:min-h-[600px] border-0"
-                            loading="lazy">
+                    <div class="card-ui !p-0 overflow-hidden bg-[#1a1a1a]">
+                        <div class="overflow-hidden rounded-lg bg-[#121212]">
+                            <iframe
+                                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1797724220&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false"
+                                class="w-full min-h-[400px] md:min-h-[600px] border-0" loading="lazy">
                             </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -221,12 +220,11 @@
                 </div>
 
                 <div class="p-1">
-                    <div class="overflow-hidden rounded-lg bg-[#121212] border border-gray-700">
-                        <iframe
+                    <div class="overflow-hidden rounded-lg bg-[#121212]">
+                        <iframe title="Planilha de Lista de avisos"
                             src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0zkxpWDSATx1QE5EQjaosgTKJJMlMg3HoXTS7zHs3k6KXredtvO-psKB4tHxi1g6ashf5k2BSvS0G/pubhtml?gid=1651059618&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false"
-                            class="w-full min-h-[400px] md:min-h-[600px] border-0"
-                            loading="lazy">
-                            </iframe>
+                            class="w-full min-h-[400px] md:min-h-[600px] border-0" loading="lazy">
+                        </iframe>
                     </div>
                 </div>
             </div>
@@ -315,14 +313,3 @@
 
 
 </html>
-
-
-
-
-
-
-
-
-
-
-

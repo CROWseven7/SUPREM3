@@ -120,7 +120,7 @@ async function carregarDadosFirestore() {
         else if (progressForColor < 75) color = "#edff00";
         else color = "#00d105";
 
-        bar.style.backgroundColor = color;
+        bar.style.background = `linear-gradient(90deg, ${color} 0%, #ffffffc8 200%)`;
         bar.style.boxShadow = `0 0 8px ${color}, 0 0 16px ${color}`;
 
         // 7. Atualização de textos
@@ -162,23 +162,3 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
