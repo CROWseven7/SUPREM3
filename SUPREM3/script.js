@@ -133,7 +133,16 @@ async function carregarDadosFirestore() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", carregarDadosFirestore);
+// Inicia a busca IMEDIATAMENTE ao carregar o arquivo JS
+const promessaDados = carregarDadosFirestore();
+
+// O listener de DOMContentLoaded agora apenas garante que o HTML 
+// existe antes de aplicarmos os dados recebidos
+document.addEventListener("DOMContentLoaded", () => {
+    // Se a promessa já resolveu, os dados serão aplicados. 
+    // Se não, ela aguardará o fim do fetch.
+    promessaDados; 
+});
 
 // Scroll show/hide do botão
 let lastScroll = 0;
@@ -154,6 +163,7 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
 
 
 
