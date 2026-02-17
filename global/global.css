@@ -22,12 +22,11 @@
 @keyframes fadeIn {
     from { 
         opacity: 0; 
-        /* Usar translate3d é melhor para performance que translateY */
-        transform: translate3d(0, 10px, 0); 
+        transform: scale(0.99); /* Trocamos o translate3d de 10px por escala */
     }
     to { 
         opacity: 1; 
-        transform: translate3d(0, 0, 0); 
+        transform: scale(1); 
     }
 }
 
@@ -92,8 +91,9 @@ body {
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    overflow: hidden; /* Garante que as linhas de vento sumam ao sair da tela */
+    overflow: hidden; 
     width: 100vw;
     height: 100vh;
 }
+
 
