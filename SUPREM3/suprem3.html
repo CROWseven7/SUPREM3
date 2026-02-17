@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUPREM3 Racing</title>
 
+    <link rel="stylesheet" href="../assets/global.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
@@ -39,11 +40,12 @@
 
     <custom-header></custom-header>
 
-    <main class="container mx-auto px-4 py-8">
+    <main class="relative z-10 mx-auto px-4 py-8 animate-fadeIn">
 
         <!-- Seção Principal -->
         <section class="mb-12 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-[0_0_10px_#ffffff]">SUPREM3 RACING</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.75)]">SUPREM3
+                RACING</h1>
             <p class="text-xl text-gray-400 max-w-2xl mx-auto">Equipe focada em bosses e bandeiras</p>
         </section>
 
@@ -52,8 +54,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                 <!-- Bloco 1 -->
-                <div
-                    class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition">
+                <div class="card-ui">
                     <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-ambar bg-opacity-20 mr-4">
                             <i data-feather="award" class="text-yellow"></i>
@@ -65,8 +66,7 @@
                 </div>
 
                 <!-- Bloco 2 -->
-                <div
-                    class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition">
+                <div class="card-ui">
                     <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-primary bg-opacity-20 mr-4">
                             <i data-feather="users" class="text-primary"></i>
@@ -78,8 +78,7 @@
                 </div>
 
                 <!-- Bloco 3 -->
-                <div
-                    class="bg-card p-6 rounded-lg border border-gray-800 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition">
+                <div class="card-ui">
                     <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-green bg-opacity-20 mr-4">
                             <i data-feather="dollar-sign" class="text-green"></i>
@@ -91,10 +90,8 @@
                 </div>
 
                 <!-- 🔹 Barra de Bosses Semanais -->
-                <div
-                    class="col-span-1 md:col-span-3 bg-card p-6 rounded-lg border border-gray-800 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition">
-                    <h3
-                        class="text-xl font-semibold mb-2 text-white drop-shadow-[0_0_4px_#bfbfbf,0_0_8px_#bfbfbf,0_0_16px_#bfbfbf,0_0_32px_#bfbfbf,0_0_64px_#bfbfbf]">
+                <div class="col-span-1 md:col-span-3 card-ui">
+                    <h3 class="text-xl font-semibold mb-2 text-white">
                         Semana atual
                     </h3>
 
@@ -118,11 +115,8 @@
 
             </div>
 
-
-
             <!-- ⏱️ Timer & Ronda Atual -->
-            <div
-                class="col-span-1 md:col-span-3 bg-card p-6 rounded-lg border border-gray-800 shadow-lg mt-4 hover:shadow-2xl hover:-translate-y-1 transition">
+            <div class="col-span-1 md:col-span-3 card-ui mt-4">
 
                 <div class="flex flex-col md:flex-row gap-4 items-stretch">
 
@@ -170,7 +164,7 @@
                 Agenda semanal
             </h2>
 
-            <div class="bg-card rounded-lg shadow-xl overflow-hidden border border-gray-800">
+            <div class="card-ui">
 
                 <div class="p-4 flex items-center justify-between border-b border-gray-800">
                     <div class="flex items-center">
@@ -202,7 +196,7 @@
                 Lista de avisos
             </h2>
 
-            <div class="bg-card rounded-lg shadow-xl overflow-hidden border border-gray-800">
+            <div class="card-ui">
 
                 <div class="p-4 flex items-center justify-between border-b border-gray-800">
                     <div class="flex items-center">
@@ -235,7 +229,7 @@
 
             <div class="space-y-4">
 
-                <div class="bg-card p-6 rounded-lg border border-gray-800 hover:-translate-y-1 transition">
+                <div class="card-ui">
                     <h3 class="text-xl font-semibold mb-2">Como fazer bosses em aberto?</h3>
                     <p class="text-gray-400">
                         Os bosses em aberto são livres para que cada membro busque a pontuação de primeiro ou segundo
@@ -245,7 +239,7 @@
                     </p>
                 </div>
 
-                <div class="bg-card p-6 rounded-lg border border-gray-800 hover:-translate-y-1 transition">
+                <div class="card-ui">
                     <h3 class="text-xl font-semibold mb-2">Como funciona a agenda?</h3>
                     <p class="text-gray-400">
                         A agenda é atualizada todas as manhãs de domingo, alterando os bosses de cada dupla.
@@ -254,7 +248,7 @@
                     </p>
                 </div>
 
-                <div class="bg-card p-6 rounded-lg border border-gray-800 hover:-translate-y-1 transition">
+                <div class="card-ui">
                     <h3 class="text-xl font-semibold mb-2">Como funciona o sistema de doações?</h3>
                     <p class="text-gray-400">
                         As doações são obrigatórias, e os valores estão detalhados no topo do site.
@@ -263,7 +257,7 @@
                     </p>
                 </div>
 
-                <div class="bg-card p-6 rounded-lg border border-gray-800 hover:-translate-y-1 transition">
+                <div class="card-ui">
                     <h3 class="text-xl font-semibold mb-2">Como realizar os bosses corretamente?</h3>
                     <p class="text-gray-400">
                         Na planilha acima, você encontrará o boss, os responsáveis pelo primeiro e segundo lugares, com
@@ -275,7 +269,7 @@
                     </p>
                 </div>
 
-                <div class="bg-card p-6 rounded-lg border border-gray-800 hover:-translate-y-1 transition">
+                <div class="card-ui">
                     <h3 class="text-xl font-semibold mb-2">Como funcionam as rondas?</h3>
                     <p class="text-gray-400">
                         A meta da equipe é realizar 30 bosses semanais, distribuídos ao longo de 6 dias (de
@@ -287,7 +281,7 @@
                     </p>
                 </div>
 
-                <div class="bg-card p-6 rounded-lg border border-gray-800 hover:-translate-y-1 transition">
+                <div class="card-ui">
                     <h3 class="text-xl font-semibold mb-2">Como funcionam os avisos?</h3>
                     <p class="text-gray-400">
                         Todos os membros começam com zero avisos.
@@ -304,12 +298,11 @@
         </section>
     </main>
 
+    <div class="wind-container pointer-events-none"></div>
+    <script src="../assets/global.js"></script>
     <script src="script.js"></script>
+
 </body>
 
 
 </html>
-
-
-
-
