@@ -85,7 +85,7 @@ async function carregarDadosFirestore() {
         const weekly = Number(fields.bossesSemana?.integerValue || 0);
 
         // 2. Atualização dos cards
-        document.getElementById('members').textContent = members + 1;
+        document.getElementById('members').textContent = members;
         document.getElementById('donations').textContent = `$${donations}`;
         document.getElementById('bosses').textContent = bossesTotalGeral.toLocaleString();
 
@@ -189,3 +189,4 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = current;
 });
+
