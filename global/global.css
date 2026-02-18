@@ -52,41 +52,23 @@
     box-shadow: 0 15px 30px rgba(0, 0, 0, 1), 0 0 15px rgba(255, 215, 0, 0.1);
 }
 
-#weeklyBar {
-    width: 100%; /* Ocupa o container todo */
-    transform: scaleX(0); /* Começa em ZERO (invisível/no canto esquerdo) */
-    transform-origin: left; /* Garante que ela cresça da esquerda para a direita */
-    will-change: transform;
-}
-
-/* 2. Garante que a linha da meta não seja considerada "largura" pelo navegador */
-#goalLine {
-    pointer-events: none;
-    z-index: 10;
-    will-change: opacity;
-    /* Evita que a linha 'vaze' visualmente se estiver em 0% ou 100% */
-    max-width: 100%; 
-}
-
 html {
-    overflow-y: scroll !important; /* Mantém a rolagem ativa */
+    overflow-y: scroll !important;
     overflow-x: hidden !important;
-    scrollbar-width: none !important; /* Firefox */
-    -ms-overflow-style: none !important; /* IE/Edge antigo */
+    scrollbar-width: none !important; 
+    -ms-overflow-style: none !important; 
 }
 
-/* Chrome, Safari, Edge Moderno e Opera */
 html::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
     height: 0 !important;
 }
 
-/* Garante que o body não tente criar uma barra própria */
 body {
     overflow-x: hidden !important;
     overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch; /* Suavidade no mobile */
+    -webkit-overflow-scrolling: touch;
 }
 
 .wind-container {
@@ -97,15 +79,5 @@ body {
     height: 100vh;
     z-index: 0;
     pointer-events: none;
-    overflow: hidden;
-}
-
-/* Container que mantém o espaço ocupado */
-.sheet-wrapper {
-    width: 100%;
-    position: relative;
-    /* Proporção baseada nos seus valores: (506 / 1233) * 100 */
-    padding-bottom: 41%; 
-    height: 0;
     overflow: hidden;
 }
